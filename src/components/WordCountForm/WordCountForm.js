@@ -1,5 +1,6 @@
-import { TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import React, { useCallback, useEffect, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export const LimitedWordTextarea = ({ value, limit }) => {
   const [{ content, wordCount }, setContent] = useState({
@@ -38,6 +39,9 @@ export const LimitedWordTextarea = ({ value, limit }) => {
         variant="outlined"
         helperText={`${wordCount === undefined ? 0 : wordCount}`}
       />
+      <CopyToClipboard text={content} variant="outlined" color="primary">
+        <Button>Copy</Button>
+      </CopyToClipboard>
     </>
   );
 };
