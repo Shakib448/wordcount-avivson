@@ -1,18 +1,14 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Textarea from "react-textarea-count";
-
-// const useStyles = makeStyles((theme) => ({
-
-// }))
+import { LimitedWordTextarea } from "../WordCountForm/WordCountForm";
 
 const Form = () => {
   return (
     <>
       <Grid container justify="center">
         <Grid item>
-          <Textarea countLimit={100} countShow={100} />
+          <LimitedWordTextarea limit={5} value="Hello there!" />
         </Grid>
       </Grid>
     </>
