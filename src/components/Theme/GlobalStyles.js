@@ -36,7 +36,6 @@ const styles = (theme) => ({
     ".MuiTableRow-root": {
       borderBottom: 0,
     },
-
     ".slick-slider": {
       margin: "0px 10px",
     },
@@ -99,6 +98,9 @@ const styles = (theme) => ({
 
     ".MuiInput-input": {
       paddingLeft: "10px !important",
+    },
+    ".MuiOutlinedInput-input": {
+      width: "350px",
     },
   },
 });
