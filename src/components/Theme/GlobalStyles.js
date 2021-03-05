@@ -5,11 +5,9 @@ const styles = (theme) => ({
     "*:focus": {
       outline: 0,
     },
-
-    "h1,h2,h3,h4": {
-      fontFamily: "Ubuntu, Roboto !important",
+    "h1,h2,h3,h4,h5,h6": {
+      fontFamily: "Lato, sans-serif !important",
     },
-
     "h1, h2": {
       fontWeight: 400,
       lineHeight: 1.3,
