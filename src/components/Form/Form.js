@@ -17,9 +17,6 @@ const useStyles = makeStyles({
     alignItems: "center",
     margin: "0 20px",
   },
-  items: {
-    marginLeft: "10px",
-  },
   formControl: {
     marginBottom: "15px",
   },
@@ -69,15 +66,7 @@ const Form = () => {
                 />
               </FormGroup>
             </Grid>
-            <Grid
-              container
-              md={5}
-              sm={12}
-              lg={4}
-              xs={12}
-              spacing={4}
-              // className={classes.items}
-            >
+            <Grid container md={5} sm={12} lg={4} xs={12} spacing={4}>
               <Grid item>
                 <Typography variant="h5">Word Count</Typography>
               </Grid>
