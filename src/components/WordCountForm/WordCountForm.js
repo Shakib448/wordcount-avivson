@@ -16,7 +16,10 @@ export const LimitedWordTextarea = ({ value, limit }) => {
           wordCount: limit,
         });
       } else {
-        setContent({ content: text, wordCount: words?.length });
+        setContent({
+          content: text,
+          wordCount: words?.length,
+        });
       }
     },
     [limit, setContent]

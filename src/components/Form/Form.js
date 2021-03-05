@@ -25,9 +25,6 @@ const Form = () => {
       <Box className={classes.root}>
         <Grid item className={classes.items}>
           <LimitedWordTextarea />
-          <LimitedWordTextarea />
-          <LimitedWordTextarea />
-          <LimitedWordTextarea />
         </Grid>
       </Box>
     </>
