@@ -5,6 +5,7 @@ import {
   FormGroup,
   TextField,
   Typography,
+  Button,
 } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,9 +17,15 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     margin: "0 20px",
+    position: "relative",
   },
   formControl: {
     marginBottom: "15px",
+  },
+  copyBtn: {
+    position: "absolute",
+    top: 485,
+    right: 450,
   },
 });
 
@@ -29,7 +36,7 @@ const Form = () => {
     <>
       <Box className={classes.root}>
         <Container>
-          <Grid container direction="row" justify="center" spacing={10}>
+          <Grid container direction="row" justify="center" spacing={8}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
                 <TextField
@@ -75,6 +82,13 @@ const Form = () => {
               </Grid>
             </Grid>
           </Grid>
+          <Button
+            className={classes.copyBtn}
+            variant="contained"
+            color="primary"
+          >
+            Copy
+          </Button>
         </Container>
       </Box>
     </>
