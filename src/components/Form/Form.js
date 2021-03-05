@@ -32,7 +32,7 @@ const Form = () => {
     <>
       <Box className={classes.root}>
         <Container>
-          <Grid container direction="row" justify="center">
+          <Grid container direction="row" justify="center" spacing={10}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
                 <TextField
@@ -76,7 +76,7 @@ const Form = () => {
               lg={4}
               xs={12}
               spacing={4}
-              className={classes.items}
+              // className={classes.items}
             >
               <Grid item>
                 <Typography variant="h5">Word Count</Typography>
