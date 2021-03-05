@@ -28,7 +28,7 @@ const Form = () => {
       <Box className={classes.root}>
         <Container>
           <Grid container justify="center">
-            <Grid item md={6} sm={12} lg={6} className={classes.items}>
+            <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
                 <TextField
                   id="filled-basic"
