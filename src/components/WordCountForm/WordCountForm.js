@@ -9,10 +9,9 @@ export const LimitedWordTextarea = ({ value, limit }) => {
   });
 
   const [testing, setTesting] = useState({});
-  console.log(testing);
 
   const WillDo = (word) => {
-    const test = word?.split(" ")?.filter(Boolean);
+    const test = word?.split(" ")?.filter(Boolean)?.join(" , ");
     setTesting(test);
   };
 
