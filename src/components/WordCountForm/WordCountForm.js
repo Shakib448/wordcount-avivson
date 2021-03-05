@@ -1,11 +1,19 @@
-import { TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import React, { useCallback, useEffect, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export const LimitedWordTextarea = ({ value, limit }) => {
   const [{ content, wordCount }, setContent] = useState({
     content: value,
     wordCount: 0,
   });
+
+  const [copyArea, setCopyArea] = useState({});
+
+  const copyText = (word) => {
+    const copyResult = word?.split(" ")?.filter(Boolean)?.join(" ,");
+    setCopyArea(copyResult);
+  };
 
   const setFormattedContent = useCallback(
     (text) => {
@@ -16,7 +24,10 @@ export const LimitedWordTextarea = ({ value, limit }) => {
           wordCount: limit,
         });
       } else {
-        setContent({ content: text, wordCount: words?.length });
+        setContent({
+          content: text,
+          wordCount: words?.length,
+        });
       }
     },
     [limit, setContent]
@@ -24,6 +35,7 @@ export const LimitedWordTextarea = ({ value, limit }) => {
 
   useEffect(() => {
     setFormattedContent(content);
+    copyText(content);
   }, [setFormattedContent, content]);
 
   return (
@@ -35,6 +47,9 @@ export const LimitedWordTextarea = ({ value, limit }) => {
         variant="outlined"
         helperText={`${wordCount === undefined ? 0 : wordCount}`}
       />
+      <CopyToClipboard text={copyArea} variant="outlined" color="primary">
+        <Button>Copy</Button>
+      </CopyToClipboard>
     </>
   );
 };
