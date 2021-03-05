@@ -1,17 +1,21 @@
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Textarea from "react-textarea-count";
+
+// const useStyles = makeStyles((theme) => ({
+
+// }))
 
 const Form = () => {
   return (
-    <Box>
+    <>
       <Grid container justify="center">
         <Grid item>
-          <Typography align="center" variant="h2">
-            This is form
-          </Typography>
+          <Textarea countLimit={100} countShow={100} />
         </Grid>
       </Grid>
-    </Box>
+    </>
   );
 };
 
