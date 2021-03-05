@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "0 20px",
   },
   items: {
     padding: "10px",
