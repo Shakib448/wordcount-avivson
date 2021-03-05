@@ -17,15 +17,17 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     margin: "0 20px",
-    position: "relative",
   },
   formControl: {
     marginBottom: "15px",
   },
+  countArea: {
+    position: "relative",
+  },
   copyBtn: {
     position: "absolute",
-    top: 485,
-    right: 450,
+    top: 405,
+    right: 270,
   },
 });
 
@@ -73,22 +75,30 @@ const Form = () => {
                 />
               </FormGroup>
             </Grid>
-            <Grid container md={5} sm={12} lg={4} xs={12} spacing={4}>
+            <Grid
+              container
+              md={5}
+              sm={12}
+              lg={4}
+              xs={12}
+              spacing={4}
+              className={classes.countArea}
+            >
               <Grid item>
                 <Typography variant="h5">Word Count</Typography>
               </Grid>
               <Grid item>
                 <Typography variant="h5">Joker Count</Typography>
               </Grid>
+              <Button
+                className={classes.copyBtn}
+                variant="contained"
+                color="primary"
+              >
+                Copy Content
+              </Button>
             </Grid>
           </Grid>
-          <Button
-            className={classes.copyBtn}
-            variant="contained"
-            color="primary"
-          >
-            Copy
-          </Button>
         </Container>
       </Box>
     </>
