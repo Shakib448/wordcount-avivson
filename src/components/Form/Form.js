@@ -71,7 +71,7 @@ const Form = () => {
             </Grid>
             <Grid
               container
-              md={4}
+              md={5}
               sm={12}
               lg={4}
               xs={12}
