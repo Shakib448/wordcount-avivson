@@ -12,7 +12,7 @@ export const LimitedWordTextarea = ({ value, limit }) => {
       let words = text?.split(" ")?.filter(Boolean);
       if (words?.length > limit) {
         setContent({
-          content: words?.slice(0, limit)?.join(","),
+          content: words?.slice(0, limit).join(","),
           wordCount: limit,
         });
       } else {
@@ -29,14 +29,10 @@ export const LimitedWordTextarea = ({ value, limit }) => {
   return (
     <>
       <TextField
-        // inputProps={{
-        //   maxlength: limit,
-        // }}
         onChange={(event) => setFormattedContent(event.target.value)}
         value={content}
         margin="normal"
         variant="outlined"
-        // helperText={`${wordCount}/${limit}`}
         helperText={`${wordCount === undefined ? 0 : wordCount}`}
       />
     </>
