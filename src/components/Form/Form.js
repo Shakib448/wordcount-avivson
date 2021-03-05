@@ -1,4 +1,11 @@
-import { Box, Container, Grid, FormGroup, TextField } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  Grid,
+  FormGroup,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -11,10 +18,7 @@ const useStyles = makeStyles({
     margin: "0 20px",
   },
   items: {
-    padding: "10px",
-    display: "flex",
-    flexDirection: "column",
-    flexWrap: "wrap",
+    marginLeft: "10px",
   },
   formControl: {
     marginBottom: "15px",
@@ -28,7 +32,7 @@ const Form = () => {
     <>
       <Box className={classes.root}>
         <Container>
-          <Grid container justify="center">
+          <Grid container direction="row" justify="center">
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
                 <TextField
@@ -64,6 +68,22 @@ const Form = () => {
                   className={classes.formControl}
                 />
               </FormGroup>
+            </Grid>
+            <Grid
+              container
+              md={4}
+              sm={12}
+              lg={4}
+              xs={12}
+              spacing={4}
+              className={classes.items}
+            >
+              <Grid item>
+                <Typography variant="h5">Word Count</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h5">Joker Count</Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Container>
