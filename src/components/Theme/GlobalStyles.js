@@ -99,9 +99,6 @@ const styles = (theme) => ({
     ".MuiInput-input": {
       paddingLeft: "10px !important",
     },
-    ".MuiOutlinedInput-input": {
-      width: "350px",
-    },
   },
 });
 
