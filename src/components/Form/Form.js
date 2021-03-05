@@ -6,7 +6,7 @@ const Form = () => {
     <Box>
       <Grid container justify="center">
         <Grid item>
-          <Typography align="center" variant="h3">
+          <Typography align="center" variant="h2">
             This is form
           </Typography>
         </Grid>
