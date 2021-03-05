@@ -8,11 +8,11 @@ export const LimitedWordTextarea = ({ value, limit }) => {
     wordCount: 0,
   });
 
-  const [testing, setTesting] = useState({});
+  const [copyArea, setCopyArea] = useState({});
 
-  const WillDo = (word) => {
-    const test = word?.split(" ")?.filter(Boolean)?.join(" , ");
-    setTesting(test);
+  const copyText = (word) => {
+    const copyResult = word?.split(" ")?.filter(Boolean)?.join(" ,");
+    setCopyArea(copyResult);
   };
 
   const setFormattedContent = useCallback(
@@ -35,7 +35,7 @@ export const LimitedWordTextarea = ({ value, limit }) => {
 
   useEffect(() => {
     setFormattedContent(content);
-    WillDo(content);
+    copyText(content);
   }, [setFormattedContent, content]);
 
   return (
@@ -47,7 +47,7 @@ export const LimitedWordTextarea = ({ value, limit }) => {
         variant="outlined"
         helperText={`${wordCount === undefined ? 0 : wordCount}`}
       />
-      <CopyToClipboard text={testing} variant="outlined" color="primary">
+      <CopyToClipboard text={copyArea} variant="outlined" color="primary">
         <Button>Copy</Button>
       </CopyToClipboard>
     </>
