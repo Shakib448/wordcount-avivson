@@ -1,10 +1,12 @@
-import { Box } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 import React from "react";
 
 const Layout = ({ children }) => {
   return (
     <Box>
-      <main>{children}</main>
+      <Container>
+        <main>{children}</main>
+      </Container>
     </Box>
   );
 };
