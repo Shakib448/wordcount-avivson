@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { lengthCount, textLength } from "../../Utils/Utils";
+import { lengthCount, textData } from "../../Utils/Utils";
 
 const useStyles = makeStyles({
   root: {
@@ -59,19 +59,22 @@ const Form = () => {
 
   const wordCount = (text, name) => {
     if (name === "joker") {
-      setJoker({ joker: textLength(text), jokerMatchCount: 0 });
+      setJoker({
+        joker: textData(text),
+        jokerMatchCount: 0,
+      });
     } else if (name === "get") {
-      setGet({ get: textLength(text), getMatchCount: 0 });
+      setGet({ get: textData(text), getMatchCount: 0 });
     } else if (name === "why") {
-      setWhy({ why: textLength(text), whyMatchCount: 0 });
+      setWhy({ why: textData(text), whyMatchCount: 0 });
     } else if (name === "conclusion") {
       setConclusion({
-        conclusion: textLength(text),
+        conclusion: textData(text),
         conclusionMatchCount: 0,
       });
     } else if (name === "explanation") {
       setExplanation({
-        explanation: textLength(text),
+        explanation: textData(text),
         explanationMatchCount: 0,
       });
     }
@@ -83,52 +86,50 @@ const Form = () => {
         <Container>
           <Grid container direction="row" justify="center" spacing={8}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
-              <form>
-                <FormGroup>
-                  <TextField
-                    id="filled-basic"
-                    label="Count of joker words with first 70 words"
-                    variant="filled"
-                    className={classes.formControl}
-                    name="joker"
-                    onChange={(e) => wordCount(e.target.value, "joker")}
-                  />
-                  <TextField
-                    id="filled-basic"
-                    label="What You Get 3 sec.7 words"
-                    variant="filled"
-                    className={classes.formControl}
-                    name="get"
-                    onChange={(e) => wordCount(e.target.value, "get")}
-                  />
-                  <TextField
-                    id="filled-basic"
-                    label="Why You?"
-                    variant="filled"
-                    name="why"
-                    className={classes.formControl}
-                    onChange={(e) => wordCount(e.target.value, "why")}
-                  />
-                  <TextField
-                    id="filled-basic"
-                    label="Conclusion 7 sec. 17 words"
-                    variant="filled"
-                    name="conclusion"
-                    className={classes.formControl}
-                    onChange={(e) => wordCount(e.target.value, "conclusion")}
-                  />
-                  <TextField
-                    label="Explanation"
-                    multiline
-                    rows={4}
-                    rowsMax={8}
-                    variant="filled"
-                    name="explanation"
-                    className={classes.formControl}
-                    onChange={(e) => wordCount(e.target.value, "explanation")}
-                  />
-                </FormGroup>
-              </form>
+              <FormGroup>
+                <TextField
+                  id="filled-basic"
+                  label="Count of joker words with first 70 words"
+                  variant="filled"
+                  className={classes.formControl}
+                  name="joker"
+                  onChange={(e) => wordCount(e.target.value, "joker")}
+                />
+                <TextField
+                  id="filled-basic"
+                  label="What You Get 3 sec.7 words"
+                  variant="filled"
+                  className={classes.formControl}
+                  name="get"
+                  onChange={(e) => wordCount(e.target.value, "get")}
+                />
+                <TextField
+                  id="filled-basic"
+                  label="Why You?"
+                  variant="filled"
+                  name="why"
+                  className={classes.formControl}
+                  onChange={(e) => wordCount(e.target.value, "why")}
+                />
+                <TextField
+                  id="filled-basic"
+                  label="Conclusion 7 sec. 17 words"
+                  variant="filled"
+                  name="conclusion"
+                  className={classes.formControl}
+                  onChange={(e) => wordCount(e.target.value, "conclusion")}
+                />
+                <TextField
+                  label="Explanation"
+                  multiline
+                  rows={4}
+                  rowsMax={8}
+                  variant="filled"
+                  name="explanation"
+                  className={classes.formControl}
+                  onChange={(e) => wordCount(e.target.value, "explanation")}
+                />
+              </FormGroup>
             </Grid>
             <Grid
               container
@@ -208,7 +209,7 @@ const Form = () => {
                   </List>
                 </Grid>
               </Grid>
-              <CopyToClipboard>
+              <CopyToClipboard text={(get, why)}>
                 <Button
                   className={classes.copyBtn}
                   variant="contained"
