@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { lengthCount } from "../../Utils/LengthCount";
+import { lengthCount, textLength } from "../../Utils/Utils";
 
 const useStyles = makeStyles({
   root: {
@@ -59,19 +59,19 @@ const Form = () => {
 
   const wordCount = (text, name) => {
     if (name === "joker") {
-      setJoker({ joker: text?.split(" ").filter(Boolean), jokerMatchCount: 0 });
+      setJoker({ joker: textLength(text), jokerMatchCount: 0 });
     } else if (name === "get") {
-      setGet({ get: text?.split(" ").filter(Boolean), getMatchCount: 0 });
+      setGet({ get: textLength(text), getMatchCount: 0 });
     } else if (name === "why") {
-      setWhy({ why: text?.split(" ").filter(Boolean), whyMatchCount: 0 });
+      setWhy({ why: textLength(text), whyMatchCount: 0 });
     } else if (name === "conclusion") {
       setConclusion({
-        conclusion: text?.split(" ").filter(Boolean),
+        conclusion: textLength(text),
         conclusionMatchCount: 0,
       });
     } else if (name === "explanation") {
       setExplanation({
-        explanation: text?.split(" ").filter(Boolean),
+        explanation: textLength(text),
         explanationMatchCount: 0,
       });
     }
