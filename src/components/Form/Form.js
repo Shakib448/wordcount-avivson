@@ -12,6 +12,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const useStyles = makeStyles({
   root: {
@@ -49,11 +50,13 @@ const useStyles = makeStyles({
 const Form = () => {
   const classes = useStyles();
 
-  const [{ joker, jokerMatchCount }, setJoker] = useState(0);
-  const [{ get, getMatchCount }, setGet] = useState(0);
-  const [{ why, whyMatchCount }, setWhy] = useState(0);
-  const [{ conclusion, conclusionMatchCount }, setConclusion] = useState(0);
-  const [{ explanation, explanationMatchCount }, setExplanation] = useState(0);
+  const [{ joker, jokerMatchCount }, setJoker] = useState("");
+  const [{ get, getMatchCount }, setGet] = useState("");
+  const [{ why, whyMatchCount }, setWhy] = useState("");
+  const [{ conclusion, conclusionMatchCount }, setConclusion] = useState("");
+  const [{ explanation, explanationMatchCount }, setExplanation] = useState("");
+
+  console.log(joker);
 
   const wordCount = (text, name) => {
     if (name === "joker") {
@@ -87,6 +90,7 @@ const Form = () => {
                   label="Count of joker words with first 70 words"
                   variant="filled"
                   className={classes.formControl}
+                  name="joker"
                   onChange={(e) => wordCount(e.target.value, "joker")}
                 />
                 <TextField
@@ -94,12 +98,14 @@ const Form = () => {
                   label="What You Get 3 sec.7 words"
                   variant="filled"
                   className={classes.formControl}
+                  name="get"
                   onChange={(e) => wordCount(e.target.value, "get")}
                 />
                 <TextField
                   id="filled-basic"
                   label="Why You?"
                   variant="filled"
+                  name="why"
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "why")}
                 />
@@ -107,6 +113,7 @@ const Form = () => {
                   id="filled-basic"
                   label="Conclusion 7 sec. 17 words"
                   variant="filled"
+                  name="conclusion"
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "conclusion")}
                 />
@@ -116,6 +123,7 @@ const Form = () => {
                   rows={4}
                   rowsMax={8}
                   variant="filled"
+                  name="explanation"
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "explanation")}
                 />
@@ -199,13 +207,15 @@ const Form = () => {
                   </List>
                 </Grid>
               </Grid>
-              <Button
-                className={classes.copyBtn}
-                variant="contained"
-                color="primary"
-              >
-                Copy Content
-              </Button>
+              <CopyToClipboard>
+                <Button
+                  className={classes.copyBtn}
+                  variant="contained"
+                  color="primary"
+                >
+                  Copy Content
+                </Button>
+              </CopyToClipboard>
             </Grid>
           </Grid>
         </Container>
