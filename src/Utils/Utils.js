@@ -5,12 +5,3 @@ export const lengthCount = (len) => {
 export const textData = (text) => {
   return text?.split(" ").filter(Boolean);
 };
-
-export const jokerCount = (text, state) => {
-  const matchData = text
-    ?.split(" ")
-    .filter(
-      (t) => t.toString().toLowerCase() === state?.toString().toLowerCase()
-    );
-  console.log(matchData);
-};
