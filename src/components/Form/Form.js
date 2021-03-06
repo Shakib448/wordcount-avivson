@@ -142,16 +142,36 @@ const Form = () => {
                     >
                       {joker?.length > 0 ? joker?.length : 0}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: get?.length >= 7,
+                        [classes.countItemsNotOk]: get?.length >= 8,
+                      })}
+                    >
                       {get?.length > 0 ? get?.length : 0}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: why?.length >= 7,
+                        [classes.countItemsNotOk]: why?.length >= 8,
+                      })}
+                    >
                       {why?.length > 0 ? why?.length : 0}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: conclusion?.length >= 7,
+                        [classes.countItemsNotOk]: conclusion?.length >= 8,
+                      })}
+                    >
                       {conclusion?.length > 0 ? conclusion?.length : 0}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: explanation?.length >= 7,
+                        [classes.countItemsNotOk]: explanation?.length >= 8,
+                      })}
+                    >
                       {explanation?.length > 0 ? explanation?.length : 0}
                     </ListItem>
                   </List>
