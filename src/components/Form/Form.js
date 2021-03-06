@@ -10,7 +10,7 @@ import {
   ListItem,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -35,29 +35,36 @@ const useStyles = makeStyles({
     fontSize: 25,
     color: "#543210",
     marginBottom: 20,
+    fontWeight: "bold",
   },
 });
 
 const Form = () => {
   const classes = useStyles();
 
-  const [joker, setJoker] = useState(0);
-  const [get, setGet] = useState(0);
-  const [why, setWhy] = useState(0);
-  const [conclusion, setConclusion] = useState(0);
-  const [explanation, setExplanation] = useState(0);
+  const [{ joker, jokerMatchCount }, setJoker] = useState(0);
+  const [{ get, getMatchCount }, setGet] = useState(0);
+  const [{ why, whyMatchCount }, setWhy] = useState(0);
+  const [{ conclusion, conclusionMatchCount }, setConclusion] = useState(0);
+  const [{ explanation, explanationMatchCount }, setExplanation] = useState(0);
 
   const wordCount = (text, name) => {
     if (name === "joker") {
-      setJoker(text?.split(" ").filter(Boolean));
+      setJoker({ joker: text?.split(" ").filter(Boolean), jokerMatchCount: 0 });
     } else if (name === "get") {
-      setGet(text?.split(" ").filter(Boolean));
+      setGet({ get: text?.split(" ").filter(Boolean), getMatchCount: 0 });
     } else if (name === "why") {
-      setWhy(text?.split(" ").filter(Boolean));
+      setWhy({ why: text?.split(" ").filter(Boolean), whyMatchCount: 0 });
     } else if (name === "conclusion") {
-      setConclusion(text?.split(" ").filter(Boolean));
+      setConclusion({
+        conclusion: text?.split(" ").filter(Boolean),
+        conclusionMatchCount: 0,
+      });
     } else if (name === "explanation") {
-      setExplanation(text?.split(" ").filter(Boolean));
+      setExplanation({
+        explanation: text?.split(" ").filter(Boolean),
+        explanationMatchCount: 0,
+      });
     }
   };
 
@@ -121,25 +128,44 @@ const Form = () => {
                 <Grid container justify="center">
                   <List>
                     <ListItem className={classes.countItems}>
-                      {joker.length > 0 ? joker.length : 0}
+                      {joker?.length > 0 ? joker?.length : 0}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {get.length > 0 ? get.length : 0}
+                      {get?.length > 0 ? get?.length : 0}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {why.length > 0 ? why.length : 0}
+                      {why?.length > 0 ? why?.length : 0}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {conclusion.length > 0 ? conclusion.length : 0}
+                      {conclusion?.length > 0 ? conclusion?.length : 0}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {explanation.length > 0 ? explanation.length : 0}
+                      {explanation?.length > 0 ? explanation?.length : 0}
                     </ListItem>
                   </List>
                 </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="h5">Joker Count</Typography>
+                <Grid container justify="center">
+                  <List>
+                    <ListItem className={classes.countItems}>
+                      {jokerMatchCount}
+                    </ListItem>
+                    <ListItem className={classes.countItems}>
+                      {getMatchCount}
+                    </ListItem>
+                    <ListItem className={classes.countItems}>
+                      {whyMatchCount}
+                    </ListItem>
+                    <ListItem className={classes.countItems}>
+                      {conclusionMatchCount}
+                    </ListItem>
+                    <ListItem className={classes.countItems}>
+                      {explanationMatchCount}
+                    </ListItem>
+                  </List>
+                </Grid>
               </Grid>
               <Button
                 className={classes.copyBtn}
