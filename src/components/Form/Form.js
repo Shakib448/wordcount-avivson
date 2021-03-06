@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { lengthCount } from "../../Utils/Count";
 
 const useStyles = makeStyles({
   root: {
@@ -56,8 +57,6 @@ const Form = () => {
   const [{ conclusion, conclusionMatchCount }, setConclusion] = useState("");
   const [{ explanation, explanationMatchCount }, setExplanation] = useState("");
 
-  console.log(joker);
-
   const wordCount = (text, name) => {
     if (name === "joker") {
       setJoker({ joker: text?.split(" ").filter(Boolean), jokerMatchCount: 0 });
@@ -84,50 +83,52 @@ const Form = () => {
         <Container>
           <Grid container direction="row" justify="center" spacing={8}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
-              <FormGroup>
-                <TextField
-                  id="filled-basic"
-                  label="Count of joker words with first 70 words"
-                  variant="filled"
-                  className={classes.formControl}
-                  name="joker"
-                  onChange={(e) => wordCount(e.target.value, "joker")}
-                />
-                <TextField
-                  id="filled-basic"
-                  label="What You Get 3 sec.7 words"
-                  variant="filled"
-                  className={classes.formControl}
-                  name="get"
-                  onChange={(e) => wordCount(e.target.value, "get")}
-                />
-                <TextField
-                  id="filled-basic"
-                  label="Why You?"
-                  variant="filled"
-                  name="why"
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "why")}
-                />
-                <TextField
-                  id="filled-basic"
-                  label="Conclusion 7 sec. 17 words"
-                  variant="filled"
-                  name="conclusion"
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "conclusion")}
-                />
-                <TextField
-                  label="Explanation"
-                  multiline
-                  rows={4}
-                  rowsMax={8}
-                  variant="filled"
-                  name="explanation"
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "explanation")}
-                />
-              </FormGroup>
+              <form>
+                <FormGroup>
+                  <TextField
+                    id="filled-basic"
+                    label="Count of joker words with first 70 words"
+                    variant="filled"
+                    className={classes.formControl}
+                    name="joker"
+                    onChange={(e) => wordCount(e.target.value, "joker")}
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="What You Get 3 sec.7 words"
+                    variant="filled"
+                    className={classes.formControl}
+                    name="get"
+                    onChange={(e) => wordCount(e.target.value, "get")}
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Why You?"
+                    variant="filled"
+                    name="why"
+                    className={classes.formControl}
+                    onChange={(e) => wordCount(e.target.value, "why")}
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Conclusion 7 sec. 17 words"
+                    variant="filled"
+                    name="conclusion"
+                    className={classes.formControl}
+                    onChange={(e) => wordCount(e.target.value, "conclusion")}
+                  />
+                  <TextField
+                    label="Explanation"
+                    multiline
+                    rows={4}
+                    rowsMax={8}
+                    variant="filled"
+                    name="explanation"
+                    className={classes.formControl}
+                    onChange={(e) => wordCount(e.target.value, "explanation")}
+                  />
+                </FormGroup>
+              </form>
             </Grid>
             <Grid
               container
@@ -148,7 +149,7 @@ const Form = () => {
                         [classes.countItemsNotOk]: joker?.length >= 8,
                       })}
                     >
-                      {joker?.length > 0 ? joker?.length : 0}
+                      {lengthCount(joker)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
@@ -156,7 +157,7 @@ const Form = () => {
                         [classes.countItemsNotOk]: get?.length >= 8,
                       })}
                     >
-                      {get?.length > 0 ? get?.length : 0}
+                      {lengthCount(get)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
@@ -164,7 +165,7 @@ const Form = () => {
                         [classes.countItemsNotOk]: why?.length >= 8,
                       })}
                     >
-                      {why?.length > 0 ? why?.length : 0}
+                      {lengthCount(why)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
@@ -172,7 +173,7 @@ const Form = () => {
                         [classes.countItemsNotOk]: conclusion?.length >= 8,
                       })}
                     >
-                      {conclusion?.length > 0 ? conclusion?.length : 0}
+                      {lengthCount(conclusion)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
@@ -180,7 +181,7 @@ const Form = () => {
                         [classes.countItemsNotOk]: explanation?.length >= 8,
                       })}
                     >
-                      {explanation?.length > 0 ? explanation?.length : 0}
+                      {lengthCount(explanation)}
                     </ListItem>
                   </List>
                 </Grid>
@@ -190,19 +191,19 @@ const Form = () => {
                 <Grid container justify="center">
                   <List>
                     <ListItem className={classes.countItems}>
-                      {jokerMatchCount}
+                      {lengthCount(jokerMatchCount)}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {getMatchCount}
+                      {lengthCount(getMatchCount)}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {whyMatchCount}
+                      {lengthCount(whyMatchCount)}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {conclusionMatchCount}
+                      {lengthCount(conclusionMatchCount)}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {explanationMatchCount}
+                      {lengthCount(explanationMatchCount)}
                     </ListItem>
                   </List>
                 </Grid>
