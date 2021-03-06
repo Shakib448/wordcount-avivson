@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { lengthCount } from "../../Utils/Count";
+import { lengthCount } from "../../Utils/LengthCount";
 
 const useStyles = makeStyles({
   root: {
