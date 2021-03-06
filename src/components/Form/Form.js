@@ -10,6 +10,7 @@ import {
   ListItem,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 import { useState } from "react";
 
 const useStyles = makeStyles({
@@ -36,6 +37,12 @@ const useStyles = makeStyles({
     color: "#543210",
     marginBottom: 20,
     fontWeight: "bold",
+  },
+  countItemsOk: {
+    color: "green !important",
+  },
+  countItemsNotOk: {
+    color: "red !important",
   },
 });
 
@@ -127,7 +134,12 @@ const Form = () => {
                 <Typography variant="h5">Word Count</Typography>
                 <Grid container justify="center">
                   <List>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: joker?.length >= 7,
+                        [classes.countItemsNotOk]: joker?.length >= 8,
+                      })}
+                    >
                       {joker?.length > 0 ? joker?.length : 0}
                     </ListItem>
                     <ListItem className={classes.countItems}>
