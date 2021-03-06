@@ -10,7 +10,7 @@ import {
   ListItem,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -47,6 +47,20 @@ const Form = () => {
   const [conclusion, setConclusion] = useState(0);
   const [explanation, setExplanation] = useState(0);
 
+  const wordCount = (text, name) => {
+    if (name === "joker") {
+      setJoker(text?.split(" ").filter(Boolean));
+    } else if (name === "get") {
+      setGet(text?.split(" ").filter(Boolean));
+    } else if (name === "why") {
+      setWhy(text?.split(" ").filter(Boolean));
+    } else if (name === "conclusion") {
+      setConclusion(text?.split(" ").filter(Boolean));
+    } else if (name === "explanation") {
+      setExplanation(text?.split(" ").filter(Boolean));
+    }
+  };
+
   return (
     <>
       <Box className={classes.root}>
@@ -59,28 +73,28 @@ const Form = () => {
                   label="Count of joker words with first 70 words"
                   variant="filled"
                   className={classes.formControl}
-                  onChange={(e) => setJoker(e.target.value)}
+                  onChange={(e) => wordCount(e.target.value, "joker")}
                 />
                 <TextField
                   id="filled-basic"
                   label="What You Get 3 sec.7 words"
                   variant="filled"
                   className={classes.formControl}
-                  onChange={(e) => setGet(e.target.value)}
+                  onChange={(e) => wordCount(e.target.value, "get")}
                 />
                 <TextField
                   id="filled-basic"
                   label="Why You?"
                   variant="filled"
                   className={classes.formControl}
-                  onChange={(e) => setWhy(e.target.value)}
+                  onChange={(e) => wordCount(e.target.value, "why")}
                 />
                 <TextField
                   id="filled-basic"
                   label="Conclusion 7 sec. 17 words"
                   variant="filled"
                   className={classes.formControl}
-                  onChange={(e) => setConclusion(e.target.value)}
+                  onChange={(e) => wordCount(e.target.value, "conclusion")}
                 />
                 <TextField
                   label="Explanation"
@@ -89,7 +103,7 @@ const Form = () => {
                   rowsMax={8}
                   variant="filled"
                   className={classes.formControl}
-                  onChange={(e) => setExplanation(e.target.value)}
+                  onChange={(e) => wordCount(e.target.value, "explanation")}
                 />
               </FormGroup>
             </Grid>
@@ -110,7 +124,7 @@ const Form = () => {
                       {joker.length > 0 ? joker.length : 0}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {get.length > 0 ? joker.length : 0}
+                      {get.length > 0 ? get.length : 0}
                     </ListItem>
                     <ListItem className={classes.countItems}>
                       {why.length > 0 ? why.length : 0}
