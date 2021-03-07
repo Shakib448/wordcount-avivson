@@ -103,7 +103,7 @@ const styles = (theme) => ({
       fontSize: "17px",
       fontWeight: "bold",
       [theme.breakpoints.down("sm")]: {
-        fontSize: "14",
+        fontSize: "12px",
       },
     },
   },
