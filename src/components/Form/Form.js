@@ -51,32 +51,141 @@ const useStyles = makeStyles({
 const Form = () => {
   const classes = useStyles();
 
-  const [{ joker, jokerMatchCount }, setJoker] = useState("");
-  const [{ get, getMatchCount }, setGet] = useState("");
-  const [{ why, whyMatchCount }, setWhy] = useState("");
-  const [{ conclusion, conclusionMatchCount }, setConclusion] = useState("");
-  const [{ explanation, explanationMatchCount }, setExplanation] = useState("");
+  const [{ joker }, setJoker] = useState("");
+  const [{ get }, setGet] = useState("");
+  const [{ why }, setWhy] = useState("");
+  const [{ conclusion }, setConclusion] = useState("");
+  const [{ explanation }, setExplanation] = useState("");
+
+  const [jokerMatchCount, setJokerMatchCount] = useState(0);
+  const [getMatchCount, setGetMatchCount] = useState(0);
+  const [whyMatchCount, setWhyMatchCount] = useState(0);
+  const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
+  const [explanationMatchCount, setExplanationMatchCount] = useState(0);
 
   const wordCount = (text, name) => {
     if (name === "joker") {
+      watchWords(text, name);
       setJoker({
         joker: textData(text),
-        jokerMatchCount: 0,
       });
     } else if (name === "get") {
-      setGet({ get: textData(text), getMatchCount: 0 });
+      setTimeout(() => {
+        watchWords(text, name);
+      }, 3000);
+      setGet({ get: textData(text) });
     } else if (name === "why") {
-      setWhy({ why: textData(text), whyMatchCount: 0 });
+      setTimeout(() => {
+        watchWords(text, name);
+      }, 5000);
+      setWhy({ why: textData(text) });
     } else if (name === "conclusion") {
+      setTimeout(() => {
+        watchWords(text, name);
+      }, 7000);
       setConclusion({
         conclusion: textData(text),
-        conclusionMatchCount: 0,
       });
     } else if (name === "explanation") {
+      watchWords(text, name);
       setExplanation({
         explanation: textData(text),
-        explanationMatchCount: 0,
       });
+    }
+  };
+
+  const watchWords = (wData, jName) => {
+    const watch_words = [
+      "You",
+      "Dig",
+      "Du",
+      "Jer",
+      "Dit",
+      "Deres",
+      "you",
+      "dig",
+      "du",
+      "jer",
+      "dit",
+      "deres",
+      "YOU",
+      "DIG",
+      "DU",
+      "JER",
+      "DIT",
+      "DERES",
+    ];
+    let data = 0;
+    for (let i = 0; i < watch_words.length; i++) {
+      if (~wData.indexOf(watch_words[i])) {
+        if (watch_words[i] === "you") {
+          data = data + 1;
+        }
+
+        if (watch_words[i] === "dig") {
+          data = data + 1;
+        }
+
+        if (watch_words[i] === "du") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "jer") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "dit") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "deres") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "You") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Dig") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Du") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Jer") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Dit") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Deres") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "YOU") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DIG") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DU") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "JER") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DIT") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DERES") {
+          data = data + 1;
+        }
+      }
+      if (jName === "joker") {
+        setJokerMatchCount(data);
+      } else if (jName === "get") {
+        setGetMatchCount(data);
+      } else if (jName === "why") {
+        setWhyMatchCount(data);
+      } else if (jName === "conclusion") {
+        setConclusionMatchCount(data);
+      } else if (jName === "explanation") {
+        setExplanationMatchCount(data);
+      }
     }
   };
 
@@ -105,7 +214,7 @@ const Form = () => {
                 />
                 <TextField
                   id="filled-basic"
-                  label="Why You?"
+                  label="Why You? 5 sec. 12 words"
                   variant="filled"
                   name="why"
                   className={classes.formControl}
@@ -146,8 +255,8 @@ const Form = () => {
                   <List>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: joker?.length >= 7,
-                        [classes.countItemsNotOk]: joker?.length >= 8,
+                        [classes.countItemsOk]: joker?.length >= 70,
+                        [classes.countItemsNotOk]: joker?.length >= 71,
                       })}
                     >
                       {lengthCount(joker)}
@@ -162,16 +271,16 @@ const Form = () => {
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: why?.length >= 7,
-                        [classes.countItemsNotOk]: why?.length >= 8,
+                        [classes.countItemsOk]: why?.length >= 12,
+                        [classes.countItemsNotOk]: why?.length >= 13,
                       })}
                     >
                       {lengthCount(why)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: conclusion?.length >= 7,
-                        [classes.countItemsNotOk]: conclusion?.length >= 8,
+                        [classes.countItemsOk]: conclusion?.length >= 17,
+                        [classes.countItemsNotOk]: conclusion?.length >= 18,
                       })}
                     >
                       {lengthCount(conclusion)}
@@ -191,20 +300,40 @@ const Form = () => {
                 <Typography variant="h5">Joker Count</Typography>
                 <Grid container justify="center">
                   <List>
-                    <ListItem className={classes.countItems}>
-                      {lengthCount(jokerMatchCount)}
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: jokerMatchCount !== 0,
+                      })}
+                    >
+                      {jokerMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
-                      {lengthCount(getMatchCount)}
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: getMatchCount !== 0,
+                      })}
+                    >
+                      {getMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
-                      {lengthCount(whyMatchCount)}
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: whyMatchCount !== 0,
+                      })}
+                    >
+                      {whyMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
-                      {lengthCount(conclusionMatchCount)}
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: conclusionMatchCount !== 0,
+                      })}
+                    >
+                      {conclusionMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
-                      {lengthCount(explanationMatchCount)}
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: explanationMatchCount !== 0,
+                      })}
+                    >
+                      {explanationMatchCount}
                     </ListItem>
                   </List>
                 </Grid>
