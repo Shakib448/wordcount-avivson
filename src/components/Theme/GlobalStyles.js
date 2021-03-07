@@ -99,18 +99,9 @@ const styles = (theme) => ({
     ".MuiInput-input": {
       paddingLeft: "10px !important",
     },
-    ".MuiInputLabel-filled": {
+    ".MuiInputLabel-outlined": {
       fontSize: "17px",
       fontWeight: "bold",
-    },
-    ".MuiFilledInput-multiline": {
-      background: "#F7F7F7",
-      "&:hover": {
-        background: "transparent",
-      },
-    },
-    ".MuiFilledInput-input": {
-      background: "#F7F7F7",
     },
   },
 });
