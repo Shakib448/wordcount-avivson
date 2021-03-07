@@ -1,5 +1,4 @@
 import {
-  Box,
   Container,
   Grid,
   FormGroup,
@@ -15,13 +14,16 @@ import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { lengthCount, textData } from "../../Utils/Utils";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    margin: "0 20px",
+    margin: "0 25px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "200px",
+    },
   },
   formControl: {
     marginBottom: "15px",
@@ -32,7 +34,15 @@ const useStyles = makeStyles({
   copyBtn: {
     position: "absolute",
     top: 405,
-    right: 270,
+    left: 0,
+    right: 130,
+    marginLeft: "auto",
+    marginRight: "auto",
+    [theme.breakpoints.down("sm")]: {
+      top: 405,
+      left: 0,
+      right: 0,
+    },
   },
   countItems: {
     fontSize: 25,
@@ -46,7 +56,14 @@ const useStyles = makeStyles({
   countItemsNotOk: {
     color: "red !important",
   },
-});
+  countSection: {
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      justifyContent: "center",
+      marginBottom: 25,
+    },
+  },
+}));
 
 const Form = () => {
   const classes = useStyles();
@@ -73,16 +90,19 @@ const Form = () => {
       setTimeout(() => {
         watchWords(text, name);
       }, 3000);
+
       setGet({ get: textData(text) });
     } else if (name === "why") {
       setTimeout(() => {
         watchWords(text, name);
       }, 5000);
+
       setWhy({ why: textData(text) });
     } else if (name === "conclusion") {
       setTimeout(() => {
         watchWords(text, name);
       }, 7000);
+
       setConclusion({
         conclusion: textData(text),
       });
@@ -190,168 +210,169 @@ const Form = () => {
   };
 
   return (
-    <>
-      <Box className={classes.root}>
-        <Container>
-          <Grid container direction="row" justify="center" spacing={8}>
-            <Grid item md={6} sm={12} lg={6} xs={12}>
+    <main className={classes.root}>
+      <Container>
+        <Grid container direction="row" justify="center" spacing={8}>
+          <Grid item md={6} sm={12} lg={6} xs={12}>
+            <form>
               <FormGroup>
                 <TextField
-                  id="filled-basic"
+                  id="outlined-basic"
                   label="Count of joker words with first 70 words"
-                  variant="filled"
+                  variant="outlined"
                   className={classes.formControl}
                   name="joker"
                   onChange={(e) => wordCount(e.target.value, "joker")}
                 />
                 <TextField
-                  id="filled-basic"
+                  id="outlined-basic"
                   label="What You Get 3 sec.7 words"
-                  variant="filled"
+                  variant="outlined"
                   className={classes.formControl}
                   name="get"
                   onChange={(e) => wordCount(e.target.value, "get")}
                 />
                 <TextField
-                  id="filled-basic"
+                  id="outlined-basic"
                   label="Why You? 5 sec. 12 words"
-                  variant="filled"
+                  variant="outlined"
                   name="why"
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "why")}
                 />
                 <TextField
-                  id="filled-basic"
+                  id="outlined-basic"
                   label="Conclusion 7 sec. 17 words"
-                  variant="filled"
+                  variant="outlined"
                   name="conclusion"
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "conclusion")}
                 />
                 <TextField
+                  id="outlined-basic"
                   label="Explanation"
                   multiline
                   rows={4}
                   rowsMax={8}
-                  variant="filled"
+                  variant="outlined"
                   name="explanation"
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "explanation")}
                 />
               </FormGroup>
-            </Grid>
-            <Grid
-              container
-              md={5}
-              sm={12}
-              lg={4}
-              xs={12}
-              spacing={4}
-              className={classes.countArea}
-            >
-              <Grid item>
-                <Typography variant="h5">Word Count</Typography>
-                <Grid container justify="center">
-                  <List>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: joker?.length >= 70,
-                        [classes.countItemsNotOk]: joker?.length >= 71,
-                      })}
-                    >
-                      {lengthCount(joker)}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: get?.length >= 7,
-                        [classes.countItemsNotOk]: get?.length >= 8,
-                      })}
-                    >
-                      {lengthCount(get)}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: why?.length >= 12,
-                        [classes.countItemsNotOk]: why?.length >= 13,
-                      })}
-                    >
-                      {lengthCount(why)}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: conclusion?.length >= 17,
-                        [classes.countItemsNotOk]: conclusion?.length >= 18,
-                      })}
-                    >
-                      {lengthCount(conclusion)}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: explanation?.length >= 7,
-                        [classes.countItemsNotOk]: explanation?.length >= 8,
-                      })}
-                    >
-                      {lengthCount(explanation)}
-                    </ListItem>
-                  </List>
-                </Grid>
-              </Grid>
-              <Grid item>
-                <Typography variant="h5">Joker Count</Typography>
-                <Grid container justify="center">
-                  <List>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: jokerMatchCount !== 0,
-                      })}
-                    >
-                      {jokerMatchCount}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: getMatchCount !== 0,
-                      })}
-                    >
-                      {getMatchCount}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: whyMatchCount !== 0,
-                      })}
-                    >
-                      {whyMatchCount}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: conclusionMatchCount !== 0,
-                      })}
-                    >
-                      {conclusionMatchCount}
-                    </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: explanationMatchCount !== 0,
-                      })}
-                    >
-                      {explanationMatchCount}
-                    </ListItem>
-                  </List>
-                </Grid>
-              </Grid>
-              <CopyToClipboard text={(get, why)}>
-                <Button
-                  className={classes.copyBtn}
-                  variant="contained"
-                  color="primary"
-                >
-                  Copy Content
-                </Button>
-              </CopyToClipboard>
-            </Grid>
+            </form>
           </Grid>
-        </Container>
-      </Box>
-    </>
+          <Grid
+            container
+            md={5}
+            sm={12}
+            lg={4}
+            xs={12}
+            spacing={4}
+            className={clsx(classes.countArea, classes.countSection)}
+          >
+            <Grid item>
+              <Typography variant="h5">Word Count</Typography>
+              <Grid container justify="center">
+                <List>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: joker?.length >= 70,
+                      [classes.countItemsNotOk]: joker?.length >= 71,
+                    })}
+                  >
+                    {lengthCount(joker)}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: get?.length >= 7,
+                      [classes.countItemsNotOk]: get?.length >= 8,
+                    })}
+                  >
+                    {lengthCount(get)}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: why?.length >= 12,
+                      [classes.countItemsNotOk]: why?.length >= 13,
+                    })}
+                  >
+                    {lengthCount(why)}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: conclusion?.length >= 17,
+                      [classes.countItemsNotOk]: conclusion?.length >= 18,
+                    })}
+                  >
+                    {lengthCount(conclusion)}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: explanation?.length >= 7,
+                      [classes.countItemsNotOk]: explanation?.length >= 8,
+                    })}
+                  >
+                    {lengthCount(explanation)}
+                  </ListItem>
+                </List>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Typography variant="h5">Joker Count</Typography>
+              <Grid container justify="center">
+                <List>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: jokerMatchCount !== 0,
+                    })}
+                  >
+                    {jokerMatchCount}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: getMatchCount !== 0,
+                    })}
+                  >
+                    {getMatchCount}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: whyMatchCount !== 0,
+                    })}
+                  >
+                    {whyMatchCount}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: conclusionMatchCount !== 0,
+                    })}
+                  >
+                    {conclusionMatchCount}
+                  </ListItem>
+                  <ListItem
+                    className={clsx(classes.countItems, {
+                      [classes.countItemsOk]: explanationMatchCount !== 0,
+                    })}
+                  >
+                    {explanationMatchCount}
+                  </ListItem>
+                </List>
+              </Grid>
+            </Grid>
+            <CopyToClipboard text={(get, why)}>
+              <Button
+                className={classes.copyBtn}
+                variant="contained"
+                color="primary"
+              >
+                Copy Content
+              </Button>
+            </CopyToClipboard>
+          </Grid>
+        </Grid>
+      </Container>
+    </main>
   );
 };
 

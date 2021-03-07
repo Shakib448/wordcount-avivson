@@ -99,6 +99,10 @@ const styles = (theme) => ({
     ".MuiInput-input": {
       paddingLeft: "10px !important",
     },
+    ".MuiInputLabel-outlined": {
+      fontSize: "17px",
+      fontWeight: "bold",
+    },
   },
 });
 
