@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { lengthCount, textData } from "../../Utils/Utils";
+import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,6 +86,13 @@ const Form = () => {
   const [whyMatchCount, setWhyMatchCount] = useState(0);
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
+
+  const [copyData, setCopyData] = useState();
+
+  const { register, handleSubmit } = useForm({});
+  const onSubmit = (data) => {
+    setCopyData([data.get, data.why, data.conclusion, data.explanation]);
+  };
 
   const wordCount = (text, name) => {
     if (name === "joker") {
@@ -216,9 +224,9 @@ const Form = () => {
   return (
     <main className={classes.root}>
       <Container>
-        <Grid container direction="row" justify="center" spacing={8}>
-          <Grid item md={6} sm={12} lg={6} xs={12}>
-            <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container direction="row" justify="center" spacing={8}>
+            <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
                 <TextField
                   id="outlined-basic"
@@ -227,7 +235,6 @@ const Form = () => {
                   className={classes.formControl}
                   name="joker"
                   onChange={(e) => wordCount(e.target.value, "joker")}
-                  labelWidth="100px"
                 />
                 <TextField
                   id="outlined-basic"
@@ -235,6 +242,7 @@ const Form = () => {
                   variant="outlined"
                   className={classes.formControl}
                   name="get"
+                  inputRef={register}
                   onChange={(e) => wordCount(e.target.value, "get")}
                 />
                 <TextField
@@ -242,6 +250,7 @@ const Form = () => {
                   label="Why You? 5 sec. 12 words"
                   variant="outlined"
                   name="why"
+                  inputRef={register}
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "why")}
                 />
@@ -250,6 +259,7 @@ const Form = () => {
                   label="Conclusion 7 sec. 17 words"
                   variant="outlined"
                   name="conclusion"
+                  inputRef={register}
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "conclusion")}
                 />
@@ -261,121 +271,125 @@ const Form = () => {
                   rowsMax={8}
                   variant="outlined"
                   name="explanation"
+                  inputRef={register}
                   className={classes.formControl}
                   onChange={(e) => wordCount(e.target.value, "explanation")}
                 />
               </FormGroup>
-            </form>
-          </Grid>
-          <Grid
-            container
-            md={5}
-            sm={12}
-            lg={4}
-            xs={12}
-            spacing={4}
-            className={clsx(classes.countArea, classes.countSection)}
-          >
-            <Grid item>
-              <Typography variant="h5">Word Count</Typography>
-              <Grid container justify="center">
-                <List style={{ marginTop: "35px" }}>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: joker?.length >= 70,
-                      [classes.countItemsNotOk]: joker?.length >= 71,
-                    })}
-                  >
-                    {/* {lengthCount(joker)} */}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: get?.length >= 7,
-                      [classes.countItemsNotOk]: get?.length >= 8,
-                    })}
-                  >
-                    {lengthCount(get)}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: why?.length >= 12,
-                      [classes.countItemsNotOk]: why?.length >= 13,
-                    })}
-                  >
-                    {lengthCount(why)}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: conclusion?.length >= 17,
-                      [classes.countItemsNotOk]: conclusion?.length >= 18,
-                    })}
-                  >
-                    {lengthCount(conclusion)}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: explanation?.length >= 7,
-                      [classes.countItemsNotOk]: explanation?.length >= 8,
-                    })}
-                  >
-                    {lengthCount(explanation)}
-                  </ListItem>
-                </List>
-              </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="h5">Joker Count</Typography>
-              <Grid container justify="center">
-                <List>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: jokerMatchCount !== 0,
-                    })}
-                  >
-                    {getMatchCount + whyMatchCount + conclusionMatchCount}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: getMatchCount !== 0,
-                    })}
-                  >
-                    {getMatchCount}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: whyMatchCount !== 0,
-                    })}
-                  >
-                    {whyMatchCount}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: conclusionMatchCount !== 0,
-                    })}
-                  >
-                    {conclusionMatchCount}
-                  </ListItem>
-                  <ListItem
-                    className={clsx(classes.countItems, {
-                      [classes.countItemsOk]: explanationMatchCount !== 0,
-                    })}
-                  >
-                    {explanationMatchCount}
-                  </ListItem>
-                </List>
+            <Grid
+              container
+              md={5}
+              sm={12}
+              lg={4}
+              xs={12}
+              spacing={4}
+              className={clsx(classes.countArea, classes.countSection)}
+            >
+              <Grid item>
+                <Typography variant="h5">Word Count</Typography>
+                <Grid container justify="center">
+                  <List style={{ marginTop: "35px" }}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: joker?.length >= 70,
+                        [classes.countItemsNotOk]: joker?.length >= 71,
+                      })}
+                    >
+                      {/* {lengthCount(joker)} */}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: get?.length >= 7,
+                        [classes.countItemsNotOk]: get?.length >= 8,
+                      })}
+                    >
+                      {lengthCount(get)}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: why?.length >= 12,
+                        [classes.countItemsNotOk]: why?.length >= 13,
+                      })}
+                    >
+                      {lengthCount(why)}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: conclusion?.length >= 17,
+                        [classes.countItemsNotOk]: conclusion?.length >= 18,
+                      })}
+                    >
+                      {lengthCount(conclusion)}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: explanation?.length >= 7,
+                        [classes.countItemsNotOk]: explanation?.length >= 8,
+                      })}
+                    >
+                      {lengthCount(explanation)}
+                    </ListItem>
+                  </List>
+                </Grid>
               </Grid>
-            </Grid>
-            <CopyToClipboard text={(get, why)}>
-              <Button
-                className={classes.copyBtn}
-                variant="contained"
-                color="primary"
+              <Grid item>
+                <Typography variant="h5">Joker Count</Typography>
+                <Grid container justify="center">
+                  <List>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: jokerMatchCount !== 0,
+                      })}
+                    >
+                      {getMatchCount + whyMatchCount + conclusionMatchCount}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: getMatchCount !== 0,
+                      })}
+                    >
+                      {getMatchCount}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: whyMatchCount !== 0,
+                      })}
+                    >
+                      {whyMatchCount}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: conclusionMatchCount !== 0,
+                      })}
+                    >
+                      {conclusionMatchCount}
+                    </ListItem>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: explanationMatchCount !== 0,
+                      })}
+                    >
+                      {explanationMatchCount}
+                    </ListItem>
+                  </List>
+                </Grid>
+              </Grid>
+              <CopyToClipboard
+                text={copyData !== undefined ? copyData : copyData}
               >
-                Copy Content
-              </Button>
-            </CopyToClipboard>
+                <Button
+                  className={classes.copyBtn}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Copy Content
+                </Button>
+              </CopyToClipboard>
+            </Grid>
           </Grid>
-        </Grid>
+        </form>
       </Container>
     </main>
   );
