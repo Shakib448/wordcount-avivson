@@ -102,6 +102,9 @@ const styles = (theme) => ({
     ".MuiInputLabel-outlined": {
       fontSize: "17px",
       fontWeight: "bold",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "12px",
+      },
     },
   },
 });
