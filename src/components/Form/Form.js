@@ -70,13 +70,19 @@ const Form = () => {
         joker: textData(text),
       });
     } else if (name === "get") {
-      watchWords(text, name);
+      setTimeout(() => {
+        watchWords(text, name);
+      }, 3000);
       setGet({ get: textData(text) });
     } else if (name === "why") {
-      watchWords(text, name);
+      setTimeout(() => {
+        watchWords(text, name);
+      }, 5000);
       setWhy({ why: textData(text) });
     } else if (name === "conclusion") {
-      watchWords(text, name);
+      setTimeout(() => {
+        watchWords(text, name);
+      }, 7000);
       setConclusion({
         conclusion: textData(text),
       });
@@ -249,8 +255,8 @@ const Form = () => {
                   <List>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: joker?.length >= 7,
-                        [classes.countItemsNotOk]: joker?.length >= 8,
+                        [classes.countItemsOk]: joker?.length >= 70,
+                        [classes.countItemsNotOk]: joker?.length >= 71,
                       })}
                     >
                       {lengthCount(joker)}
@@ -265,16 +271,16 @@ const Form = () => {
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: why?.length >= 7,
-                        [classes.countItemsNotOk]: why?.length >= 8,
+                        [classes.countItemsOk]: why?.length >= 12,
+                        [classes.countItemsNotOk]: why?.length >= 13,
                       })}
                     >
                       {lengthCount(why)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: conclusion?.length >= 7,
-                        [classes.countItemsNotOk]: conclusion?.length >= 8,
+                        [classes.countItemsOk]: conclusion?.length >= 17,
+                        [classes.countItemsNotOk]: conclusion?.length >= 18,
                       })}
                     >
                       {lengthCount(conclusion)}
