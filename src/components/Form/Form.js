@@ -214,7 +214,7 @@ const Form = () => {
                 />
                 <TextField
                   id="filled-basic"
-                  label="Why You?"
+                  label="Why You? 5 sec. 12 words"
                   variant="filled"
                   name="why"
                   className={classes.formControl}
@@ -300,19 +300,39 @@ const Form = () => {
                 <Typography variant="h5">Joker Count</Typography>
                 <Grid container justify="center">
                   <List>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: jokerMatchCount !== 0,
+                      })}
+                    >
                       {jokerMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: getMatchCount !== 0,
+                      })}
+                    >
                       {getMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: whyMatchCount !== 0,
+                      })}
+                    >
                       {whyMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: conclusionMatchCount !== 0,
+                      })}
+                    >
                       {conclusionMatchCount}
                     </ListItem>
-                    <ListItem className={classes.countItems}>
+                    <ListItem
+                      className={clsx(classes.countItems, {
+                        [classes.countItemsOk]: explanationMatchCount !== 0,
+                      })}
+                    >
                       {explanationMatchCount}
                     </ListItem>
                   </List>
