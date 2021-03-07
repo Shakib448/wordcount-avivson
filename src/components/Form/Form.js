@@ -86,9 +86,7 @@ const Form = () => {
   const [whyMatchCount, setWhyMatchCount] = useState(0);
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
-
   const [copyData, setCopyData] = useState();
-  console.log(copyData);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -376,9 +374,7 @@ const Form = () => {
                   </List>
                 </Grid>
               </Grid>
-              <CopyToClipboard
-                text={copyData !== undefined ? copyData : copyData}
-              >
+              <CopyToClipboard text={copyData}>
                 <Button
                   className={classes.copyBtn}
                   variant="contained"
