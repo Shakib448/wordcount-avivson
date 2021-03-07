@@ -50,6 +50,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
     fontWeight: "bold",
   },
+  countItemsWord: {
+    fontSize: 25,
+    color: "#543210",
+    marginBottom: 40,
+    fontWeight: "bold",
+  },
   countItemsOk: {
     color: "green !important",
   },
@@ -141,11 +147,9 @@ const Form = () => {
         if (watch_words[i] === "you") {
           data = data + 1;
         }
-
         if (watch_words[i] === "dig") {
           data = data + 1;
         }
-
         if (watch_words[i] === "du") {
           data = data + 1;
         }
@@ -223,6 +227,7 @@ const Form = () => {
                   className={classes.formControl}
                   name="joker"
                   onChange={(e) => wordCount(e.target.value, "joker")}
+                  labelWidth="100px"
                 />
                 <TextField
                   id="outlined-basic"
@@ -274,14 +279,14 @@ const Form = () => {
             <Grid item>
               <Typography variant="h5">Word Count</Typography>
               <Grid container justify="center">
-                <List>
+                <List style={{ marginTop: "35px" }}>
                   <ListItem
                     className={clsx(classes.countItems, {
                       [classes.countItemsOk]: joker?.length >= 70,
                       [classes.countItemsNotOk]: joker?.length >= 71,
                     })}
                   >
-                    {lengthCount(joker)}
+                    {/* {lengthCount(joker)} */}
                   </ListItem>
                   <ListItem
                     className={clsx(classes.countItems, {
@@ -327,7 +332,7 @@ const Form = () => {
                       [classes.countItemsOk]: jokerMatchCount !== 0,
                     })}
                   >
-                    {jokerMatchCount}
+                    {getMatchCount + whyMatchCount + conclusionMatchCount}
                   </ListItem>
                   <ListItem
                     className={clsx(classes.countItems, {

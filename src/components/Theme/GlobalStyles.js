@@ -100,7 +100,7 @@ const styles = (theme) => ({
       paddingLeft: "10px !important",
     },
     ".MuiInputLabel-outlined": {
-      fontSize: "17px",
+      fontSize: "15px",
       fontWeight: "bold",
       [theme.breakpoints.down("sm")]: {
         fontSize: "12px",
