@@ -194,13 +194,7 @@ const Form = () => {
   return (
     <main className={classes.root}>
       <Container>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          spacing={8}
-          style={{ border: "5px solid red" }}
-        >
+        <Grid container direction="row" justify="center" spacing={8}>
           <Grid item md={6} sm={12} lg={6} xs={12}>
             <FormGroup>
               <TextField
