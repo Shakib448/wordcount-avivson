@@ -88,8 +88,9 @@ const Form = () => {
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
 
   const [copyData, setCopyData] = useState();
+  console.log(copyData);
 
-  const { register, handleSubmit } = useForm({});
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     setCopyData([data.get, data.why, data.conclusion, data.explanation]);
   };
