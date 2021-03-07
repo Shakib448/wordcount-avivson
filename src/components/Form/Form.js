@@ -51,32 +51,135 @@ const useStyles = makeStyles({
 const Form = () => {
   const classes = useStyles();
 
-  const [{ joker, jokerMatchCount }, setJoker] = useState("");
-  const [{ get, getMatchCount }, setGet] = useState("");
-  const [{ why, whyMatchCount }, setWhy] = useState("");
-  const [{ conclusion, conclusionMatchCount }, setConclusion] = useState("");
-  const [{ explanation, explanationMatchCount }, setExplanation] = useState("");
+  const [{ joker }, setJoker] = useState("");
+  const [{ get }, setGet] = useState("");
+  const [{ why }, setWhy] = useState("");
+  const [{ conclusion }, setConclusion] = useState("");
+  const [{ explanation }, setExplanation] = useState("");
+
+  const [jokerMatchCount, setJokerMatchCount] = useState(0);
+  const [getMatchCount, setGetMatchCount] = useState(0);
+  const [whyMatchCount, setWhyMatchCount] = useState(0);
+  const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
+  const [explanationMatchCount, setExplanationMatchCount] = useState(0);
 
   const wordCount = (text, name) => {
     if (name === "joker") {
+      watchWords(text, name);
       setJoker({
         joker: textData(text),
-        jokerMatchCount: 0,
       });
     } else if (name === "get") {
-      setGet({ get: textData(text), getMatchCount: 0 });
+      watchWords(text, name);
+      setGet({ get: textData(text) });
     } else if (name === "why") {
-      setWhy({ why: textData(text), whyMatchCount: 0 });
+      watchWords(text, name);
+      setWhy({ why: textData(text) });
     } else if (name === "conclusion") {
+      watchWords(text, name);
       setConclusion({
         conclusion: textData(text),
-        conclusionMatchCount: 0,
       });
     } else if (name === "explanation") {
+      watchWords(text, name);
       setExplanation({
         explanation: textData(text),
-        explanationMatchCount: 0,
       });
+    }
+  };
+
+  const watchWords = (wData, jName) => {
+    const watch_words = [
+      "You",
+      "Dig",
+      "Du",
+      "Jer",
+      "Dit",
+      "Deres",
+      "you",
+      "dig",
+      "du",
+      "jer",
+      "dit",
+      "deres",
+      "YOU",
+      "DIG",
+      "DU",
+      "JER",
+      "DIT",
+      "DERES",
+    ];
+    let data = 0;
+    for (let i = 0; i < watch_words.length; i++) {
+      if (~wData.indexOf(watch_words[i])) {
+        if (watch_words[i] === "you") {
+          data = data + 1;
+        }
+
+        if (watch_words[i] === "dig") {
+          data = data + 1;
+        }
+
+        if (watch_words[i] === "du") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "jer") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "dit") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "deres") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "You") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Dig") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Du") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Jer") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Dit") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "Deres") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "YOU") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DIG") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DU") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "JER") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DIT") {
+          data = data + 1;
+        }
+        if (watch_words[i] === "DERES") {
+          data = data + 1;
+        }
+      }
+      if (jName === "joker") {
+        setJokerMatchCount(data);
+      } else if (jName === "get") {
+        setGetMatchCount(data);
+      } else if (jName === "why") {
+        setWhyMatchCount(data);
+      } else if (jName === "conclusion") {
+        setConclusionMatchCount(data);
+      } else if (jName === "explanation") {
+        setExplanationMatchCount(data);
+      }
     }
   };
 
@@ -192,19 +295,19 @@ const Form = () => {
                 <Grid container justify="center">
                   <List>
                     <ListItem className={classes.countItems}>
-                      {lengthCount(jokerMatchCount)}
+                      {jokerMatchCount}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {lengthCount(getMatchCount)}
+                      {getMatchCount}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {lengthCount(whyMatchCount)}
+                      {whyMatchCount}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {lengthCount(conclusionMatchCount)}
+                      {conclusionMatchCount}
                     </ListItem>
                     <ListItem className={classes.countItems}>
-                      {lengthCount(explanationMatchCount)}
+                      {explanationMatchCount}
                     </ListItem>
                   </List>
                 </Grid>
