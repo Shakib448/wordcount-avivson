@@ -18,7 +18,9 @@ const useStyles = makeStyles({
   root: {
     height: "100vh",
     display: "flex",
+    justifyContent: "center",
     alignItems: "center",
+    margin: "0 25px",
   },
   formControl: {
     marginBottom: "15px",
@@ -204,7 +206,7 @@ const Form = () => {
               <TextField
                 id="filled-basic"
                 label="Count of joker words with first 70 words"
-                variant="filled"
+                variant="outlined"
                 className={classes.formControl}
                 name="joker"
                 onChange={(e) => wordCount(e.target.value, "joker")}
@@ -212,7 +214,7 @@ const Form = () => {
               <TextField
                 id="filled-basic"
                 label="What You Get 3 sec.7 words"
-                variant="filled"
+                variant="outlined"
                 className={classes.formControl}
                 name="get"
                 onChange={(e) => wordCount(e.target.value, "get")}
@@ -220,7 +222,7 @@ const Form = () => {
               <TextField
                 id="filled-basic"
                 label="Why You? 5 sec. 12 words"
-                variant="filled"
+                variant="outlined"
                 name="why"
                 className={classes.formControl}
                 onChange={(e) => wordCount(e.target.value, "why")}
@@ -228,7 +230,7 @@ const Form = () => {
               <TextField
                 id="filled-basic"
                 label="Conclusion 7 sec. 17 words"
-                variant="filled"
+                variant="outlined"
                 name="conclusion"
                 className={classes.formControl}
                 onChange={(e) => wordCount(e.target.value, "conclusion")}
@@ -238,7 +240,7 @@ const Form = () => {
                 multiline
                 rows={4}
                 rowsMax={8}
-                variant="filled"
+                variant="outlined"
                 name="explanation"
                 className={classes.formControl}
                 onChange={(e) => wordCount(e.target.value, "explanation")}
