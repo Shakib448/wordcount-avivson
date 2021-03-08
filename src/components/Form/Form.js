@@ -7,6 +7,7 @@ import {
   Button,
   List,
   ListItem,
+  FormControl,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -292,58 +293,61 @@ const Form = () => {
     <main className={classes.root}>
       <Container>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {unique?.join(" ,")}
           <Grid container direction="row" justify="center" spacing={8}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
-                <TextField
-                  id="outlined-basic"
-                  label="Count of joker words with first 70 words"
-                  variant="outlined"
-                  className={classes.formControl}
-                  defaultValue={unique?.join(" ,")}
-                  // name="joker"
-                  // onChange={(e) => wordCount(e.target.value, "joker")}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="What You Get 3 sec.7 words"
-                  variant="outlined"
-                  className={classes.formControl}
-                  name="get"
-                  inputRef={register}
-                  onChange={(e) => wordCount(e.target.value, "get")}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Why You? 5 sec. 12 words"
-                  variant="outlined"
-                  name="why"
-                  inputRef={register}
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "why")}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Conclusion 7 sec. 17 words"
-                  variant="outlined"
-                  name="conclusion"
-                  inputRef={register}
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "conclusion")}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Explanation"
-                  multiline
-                  rows={4}
-                  rowsMax={8}
-                  variant="outlined"
-                  name="explanation"
-                  inputRef={register}
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "explanation")}
-                />
+                <FormControl>
+                  <TextField
+                    id="outlined-basic"
+                    label="Count of joker words with first 70 words"
+                    variant="outlined"
+                    className={classes.formControl}
+                    defaultValue={unique?.join(" ,")}
+                    value={unique.join(" ,")}
+                    // name="joker"
+                    // onChange={(e) => wordCount(e.target.value, "joker")}
+                  />
+
+                  <TextField
+                    id="outlined-basic"
+                    label="What You Get 3 sec.7 words"
+                    variant="outlined"
+                    className={classes.formControl}
+                    name="get"
+                    inputRef={register}
+                    onChange={(e) => wordCount(e.target.value, "get")}
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Why You? 5 sec. 12 words"
+                    variant="outlined"
+                    name="why"
+                    inputRef={register}
+                    className={classes.formControl}
+                    onChange={(e) => wordCount(e.target.value, "why")}
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Conclusion 7 sec. 17 words"
+                    variant="outlined"
+                    name="conclusion"
+                    inputRef={register}
+                    className={classes.formControl}
+                    onChange={(e) => wordCount(e.target.value, "conclusion")}
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Explanation"
+                    multiline
+                    rows={4}
+                    rowsMax={8}
+                    variant="outlined"
+                    name="explanation"
+                    inputRef={register}
+                    className={classes.formControl}
+                    onChange={(e) => wordCount(e.target.value, "explanation")}
+                  />
+                </FormControl>
               </FormGroup>
             </Grid>
             <Grid
