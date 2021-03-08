@@ -2,7 +2,6 @@ import {
   Container,
   Grid,
   FormGroup,
-  // TextField,
   Typography,
   Button,
   List,
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 405,
     left: 0,
-    right: 130,
+    right: 105,
     marginLeft: "auto",
     marginRight: "auto",
     [theme.breakpoints.down("sm")]: {
@@ -81,7 +80,6 @@ const Form = () => {
   const [{ why }, setWhy] = useState("");
   const [{ conclusion }, setConclusion] = useState("");
   const [{ explanation }, setExplanation] = useState("");
-
   const [getMatchCount, setGetMatchCount] = useState(0);
   const [whyMatchCount, setWhyMatchCount] = useState(0);
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
@@ -89,8 +87,8 @@ const Form = () => {
   const [matchGet, setMatchGet] = useState([]);
   const [matchWhy, setMatchWhy] = useState([]);
   const [matchConclusion, setMatchConclusion] = useState([]);
-  const [copyData, setCopyData] = useState({});
-  console.log(copyData);
+
+  const [explanationData, setExplanationData] = useState("");
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
@@ -98,9 +96,7 @@ const Form = () => {
   let unique = [...new Set(matchWords)];
 
   const { handleSubmit, register } = useForm();
-  const onSubmit = (data) => {
-    setCopyData(data);
-  };
+  const onSubmit = (data) => {};
 
   const wordCount = (text, name) => {
     if (name === "get") {
@@ -125,6 +121,7 @@ const Form = () => {
       });
     } else if (name === "explanation") {
       watchWords(text, name);
+      setExplanationData(text);
       setExplanation({
         explanation: textData(text),
       });
@@ -282,19 +279,19 @@ const Form = () => {
     }
   };
 
+  console.log(explanationData?.toString());
+
   function copyToClipBoard() {
-    if (get?.length !== 0 && why?.length !== 0 && conclusion.length !== 0) {
-      const str = document.getElementById("data")?.innerText;
-      const el = document.createElement("textarea");
-      el.value = str;
-      el.setAttribute("readonly", "");
-      el.style.position = "absolute";
-      el.style.left = "-9999px";
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-    }
+    const str = document.getElementById("data")?.innerText;
+    const el = document.createElement("textarea");
+    el.value = str;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
   }
 
   return (
@@ -461,7 +458,7 @@ const Form = () => {
             </Grid>
           </Grid>
         </form>
-        <div
+        <pre
           id="data"
           style={{
             color: "transparent",
@@ -473,62 +470,11 @@ const Form = () => {
           {get?.join(" ")} <br /> <br />
           {why?.join(" ")} <br /> <br />
           {conclusion?.join(" ")} <br /> <br />
-          {explanation?.join(" ")}
-        </div>
+          {explanationData}
+        </pre>
       </Container>
     </main>
   );
 };
 
 export default Form;
-
-// {/* <TextField
-//   id="outlined-basic"
-//   label="Count of joker words with first 70 words"
-//   variant="outlined"
-//   className={classes.formControl}
-//   defaultValue={unique?.join(" ,")}
-//   value={unique.join(" ,")}
-//   // name="joker"
-//   // onChange={(e) => wordCount(e.target.value, "joker")}
-// /> */}
-
-// {/* <TextField
-//   id="outlined-basic"
-//   label="What You Get 3 sec.7 words"
-//   variant="outlined"
-//   className={classes.formControl}
-//   name="get"
-//   inputRef={register}
-//   onChange={(e) => wordCount(e.target.value, "get")}
-// /> */}
-// {/* <TextField
-//   id="outlined-basic"
-//   label="Why You? 5 sec. 12 words"
-//   variant="outlined"
-//   name="why"
-//   inputRef={register}
-//   className={classes.formControl}
-//   onChange={(e) => wordCount(e.target.value, "why")}
-// /> */}
-// {/* <TextField
-//   id="outlined-basic"
-//   label="Conclusion 7 sec. 17 words"
-//   variant="outlined"
-//   name="conclusion"
-//   inputRef={register}
-//   className={classes.formControl}
-//   onChange={(e) => wordCount(e.target.value, "conclusion")}
-// /> */}
-// {/* <TextField
-//   id="outlined-basic"
-//   label="Explanation"
-//   multiline
-//   rows={4}
-//   rowsMax={8}
-//   variant="outlined"
-//   name="explanation"
-//   inputRef={register}
-//   className={classes.formControl}
-//   onChange={(e) => wordCount(e.target.value, "explanation")}
-// /> */}
