@@ -292,6 +292,7 @@ const Form = () => {
     <main className={classes.root}>
       <Container>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {unique?.join(" ,")}
           <Grid container direction="row" justify="center" spacing={8}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
@@ -300,8 +301,9 @@ const Form = () => {
                   label="Count of joker words with first 70 words"
                   variant="outlined"
                   className={classes.formControl}
-                  name="joker"
-                  onChange={(e) => wordCount(e.target.value, "joker")}
+                  defaultValue={unique?.join(" ,")}
+                  // name="joker"
+                  // onChange={(e) => wordCount(e.target.value, "joker")}
                 />
                 <TextField
                   id="outlined-basic"
@@ -409,7 +411,7 @@ const Form = () => {
                         [classes.countItemsOk]: jokerMatchCount !== 0,
                       })}
                     >
-                      {getMatchCount + whyMatchCount + conclusionMatchCount}
+                      {unique?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
