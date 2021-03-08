@@ -2,7 +2,6 @@ import {
   Container,
   Grid,
   FormGroup,
-  // TextField,
   Typography,
   Button,
   List,
@@ -89,9 +88,7 @@ const Form = () => {
   const [matchWhy, setMatchWhy] = useState([]);
   const [matchConclusion, setMatchConclusion] = useState([]);
 
-  const [explanationData, setExplanationData] = useState();
-
-  console.log(explanationData?.toString());
+  const [explanationData, setExplanationData] = useState("");
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
@@ -125,7 +122,6 @@ const Form = () => {
     } else if (name === "explanation") {
       watchWords(text, name);
       setExplanationData(text);
-
       setExplanation({
         explanation: textData(text),
       });
@@ -462,7 +458,7 @@ const Form = () => {
             </Grid>
           </Grid>
         </form>
-        <div
+        <pre
           id="data"
           style={{
             color: "transparent",
@@ -474,8 +470,8 @@ const Form = () => {
           {get?.join(" ")} <br /> <br />
           {why?.join(" ")} <br /> <br />
           {conclusion?.join(" ")} <br /> <br />
-          {explanation?.join(" ")}
-        </div>
+          {explanationData}
+        </pre>
       </Container>
     </main>
   );
