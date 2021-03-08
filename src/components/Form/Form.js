@@ -14,7 +14,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { lengthCount, textData } from "../../Utils/Utils";
 import { useForm } from "react-hook-form";
 
@@ -78,13 +77,11 @@ const useStyles = makeStyles((theme) => ({
 const Form = () => {
   const classes = useStyles();
 
-  const [{ joker }, setJoker] = useState("");
   const [{ get }, setGet] = useState("");
   const [{ why }, setWhy] = useState("");
   const [{ conclusion }, setConclusion] = useState("");
   const [{ explanation }, setExplanation] = useState("");
 
-  const [jokerMatchCount, setJokerMatchCount] = useState(0);
   const [getMatchCount, setGetMatchCount] = useState(0);
   const [whyMatchCount, setWhyMatchCount] = useState(0);
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
@@ -92,26 +89,21 @@ const Form = () => {
   const [matchGet, setMatchGet] = useState([]);
   const [matchWhy, setMatchWhy] = useState([]);
   const [matchConclusion, setMatchConclusion] = useState([]);
+  const [copyData, setCopyData] = useState({});
+  console.log(copyData);
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
   const matchWords = matchGet.concat(matchWhy).concat(matchConclusion);
   let unique = [...new Set(matchWords)];
 
-  // const { register, handleSubmit } = useForm();
-  const { handleSubmit } = useForm();
+  const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
-    // setCopyData([data.get, data.why, data.conclusion, data.explanation]);
-    console.log(data);
+    setCopyData(data);
   };
 
   const wordCount = (text, name) => {
-    if (name === "joker") {
-      watchWords(text, name);
-      setJoker({
-        joker: textData(text),
-      });
-    } else if (name === "get") {
+    if (name === "get") {
       setTimeout(() => {
         watchWords(text, name);
       }, 3000);
@@ -275,9 +267,7 @@ const Form = () => {
           jokerConclusion.push("DERES");
         }
       }
-      if (jName === "joker") {
-        setJokerMatchCount(data);
-      } else if (jName === "get") {
+      if (jName === "get") {
         setGetMatchCount(data);
         setMatchGet(jokerGet);
       } else if (jName === "why") {
@@ -292,6 +282,21 @@ const Form = () => {
     }
   };
 
+  function copyToClipBoard() {
+    if (get?.length !== 0 && why?.length !== 0 && conclusion.length !== 0) {
+      const str = document.getElementById("data")?.innerText;
+      const el = document.createElement("textarea");
+      el.value = str;
+      el.setAttribute("readonly", "");
+      el.style.position = "absolute";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+  }
+
   return (
     <main className={classes.root}>
       <Container>
@@ -303,11 +308,12 @@ const Form = () => {
                   <InputLabel>
                     Count of joker words with first 70 words
                   </InputLabel>
-
                   <Input
                     className={classes.formControl}
                     value={unique.join(" ,")}
                     onChange={(e) => wordCount(e.target.value, "joker")}
+                    name="get"
+                    inputRef={register}
                   />
                 </FormControl>
                 <FormControl>
@@ -316,6 +322,8 @@ const Form = () => {
                   <Input
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "get")}
+                    name="get"
+                    inputRef={register}
                   />
                 </FormControl>
                 <FormControl>
@@ -324,6 +332,8 @@ const Form = () => {
                   <Input
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "why")}
+                    name="why"
+                    inputRef={register}
                   />
                 </FormControl>
                 <FormControl>
@@ -332,6 +342,8 @@ const Form = () => {
                   <Input
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
+                    name="conclusion"
+                    inputRef={register}
                   />
                 </FormControl>
                 <FormControl>
@@ -343,59 +355,10 @@ const Form = () => {
                     rows={4}
                     rowsMax={8}
                     onChange={(e) => wordCount(e.target.value, "explanation")}
+                    name="explanation"
+                    inputRef={register}
                   />
                 </FormControl>
-
-                {/* <TextField
-                  id="outlined-basic"
-                  label="Count of joker words with first 70 words"
-                  variant="outlined"
-                  className={classes.formControl}
-                  defaultValue={unique?.join(" ,")}
-                  value={unique.join(" ,")}
-                  // name="joker"
-                  // onChange={(e) => wordCount(e.target.value, "joker")}
-                /> */}
-
-                {/* <TextField
-                  id="outlined-basic"
-                  label="What You Get 3 sec.7 words"
-                  variant="outlined"
-                  className={classes.formControl}
-                  name="get"
-                  inputRef={register}
-                  onChange={(e) => wordCount(e.target.value, "get")}
-                /> */}
-                {/* <TextField
-                  id="outlined-basic"
-                  label="Why You? 5 sec. 12 words"
-                  variant="outlined"
-                  name="why"
-                  inputRef={register}
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "why")}
-                /> */}
-                {/* <TextField
-                  id="outlined-basic"
-                  label="Conclusion 7 sec. 17 words"
-                  variant="outlined"
-                  name="conclusion"
-                  inputRef={register}
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "conclusion")}
-                /> */}
-                {/* <TextField
-                  id="outlined-basic"
-                  label="Explanation"
-                  multiline
-                  rows={4}
-                  rowsMax={8}
-                  variant="outlined"
-                  name="explanation"
-                  inputRef={register}
-                  className={classes.formControl}
-                  onChange={(e) => wordCount(e.target.value, "explanation")}
-                /> */}
               </FormGroup>
             </Grid>
             <Grid
@@ -411,14 +374,7 @@ const Form = () => {
                 <Typography variant="h5">Word Count</Typography>
                 <Grid container justify="center">
                   <List style={{ marginTop: "35px" }}>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: joker?.length >= 70,
-                        [classes.countItemsNotOk]: joker?.length >= 71,
-                      })}
-                    >
-                      {/* {lengthCount(joker)} */}
-                    </ListItem>
+                    <ListItem className={clsx(classes.countItems)}></ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: get?.length >= 7,
@@ -443,12 +399,7 @@ const Form = () => {
                     >
                       {lengthCount(conclusion)}
                     </ListItem>
-                    <ListItem
-                      className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: explanation?.length >= 7,
-                        [classes.countItemsNotOk]: explanation?.length >= 8,
-                      })}
-                    >
+                    <ListItem className={clsx(classes.countItems)}>
                       {lengthCount(explanation)}
                     </ListItem>
                   </List>
@@ -456,11 +407,13 @@ const Form = () => {
               </Grid>
               <Grid item>
                 <Typography variant="h5">Joker Count</Typography>
+
                 <Grid container justify="center">
                   <List>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: jokerMatchCount !== 0,
+                        [classes.countItemsOk]: unique?.length >= 5,
+                        [classes.countItemsNotOk]: fullData?.length >= 70,
                       })}
                     >
                       {unique?.length}
@@ -496,22 +449,86 @@ const Form = () => {
                   </List>
                 </Grid>
               </Grid>
-              <CopyToClipboard text={fullData?.join(" ")}>
-                <Button
-                  className={classes.copyBtn}
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                >
-                  Copy Content
-                </Button>
-              </CopyToClipboard>
+              <Button
+                className={classes.copyBtn}
+                variant="contained"
+                color="primary"
+                type="submit"
+                onClick={copyToClipBoard}
+              >
+                Copy Content
+              </Button>
             </Grid>
           </Grid>
         </form>
+        <div
+          id="data"
+          style={{
+            color: "transparent",
+            position: "absolute",
+            top: "0",
+            left: "0",
+          }}
+        >
+          {get?.join(" ")} <br /> <br />
+          {why?.join(" ")} <br /> <br />
+          {conclusion?.join(" ")} <br /> <br />
+          {explanation?.join(" ")}
+        </div>
       </Container>
     </main>
   );
 };
 
 export default Form;
+
+// {/* <TextField
+//   id="outlined-basic"
+//   label="Count of joker words with first 70 words"
+//   variant="outlined"
+//   className={classes.formControl}
+//   defaultValue={unique?.join(" ,")}
+//   value={unique.join(" ,")}
+//   // name="joker"
+//   // onChange={(e) => wordCount(e.target.value, "joker")}
+// /> */}
+
+// {/* <TextField
+//   id="outlined-basic"
+//   label="What You Get 3 sec.7 words"
+//   variant="outlined"
+//   className={classes.formControl}
+//   name="get"
+//   inputRef={register}
+//   onChange={(e) => wordCount(e.target.value, "get")}
+// /> */}
+// {/* <TextField
+//   id="outlined-basic"
+//   label="Why You? 5 sec. 12 words"
+//   variant="outlined"
+//   name="why"
+//   inputRef={register}
+//   className={classes.formControl}
+//   onChange={(e) => wordCount(e.target.value, "why")}
+// /> */}
+// {/* <TextField
+//   id="outlined-basic"
+//   label="Conclusion 7 sec. 17 words"
+//   variant="outlined"
+//   name="conclusion"
+//   inputRef={register}
+//   className={classes.formControl}
+//   onChange={(e) => wordCount(e.target.value, "conclusion")}
+// /> */}
+// {/* <TextField
+//   id="outlined-basic"
+//   label="Explanation"
+//   multiline
+//   rows={4}
+//   rowsMax={8}
+//   variant="outlined"
+//   name="explanation"
+//   inputRef={register}
+//   className={classes.formControl}
+//   onChange={(e) => wordCount(e.target.value, "explanation")}
+// /> */}
