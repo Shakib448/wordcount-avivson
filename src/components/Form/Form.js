@@ -87,6 +87,14 @@ const Form = () => {
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
   const [copyData, setCopyData] = useState();
+  const [matchGet, setMatchGet] = useState([]);
+  const [matchWhy, setMatchWhy] = useState([]);
+  const [matchConclusion, setMatchConclusion] = useState([]);
+
+  const matchWords = matchGet.concat(matchWhy).concat(matchConclusion);
+  let unique = [...new Set(matchWords)];
+
+  console.log(unique);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -149,71 +157,131 @@ const Form = () => {
       "DERES",
     ];
     let data = 0;
+    let jokerGet = [];
+    let jokerWhy = [];
+    let jokerConclusion = [];
     for (let i = 0; i < watch_words.length; i++) {
       if (~wData.indexOf(watch_words[i])) {
         if (watch_words[i] === "you") {
           data = data + 1;
+          jokerGet.push("you");
+          jokerWhy.push("you");
+          jokerConclusion.push("you");
         }
         if (watch_words[i] === "dig") {
           data = data + 1;
+          jokerGet.push("dig");
+          jokerWhy.push("dig");
+          jokerConclusion.push("dig");
         }
         if (watch_words[i] === "du") {
           data = data + 1;
+          jokerGet.push("du");
+          jokerWhy.push("du");
+          jokerConclusion.push("du");
         }
         if (watch_words[i] === "jer") {
           data = data + 1;
+          jokerGet.push("jer");
+          jokerWhy.push("jer");
+          jokerConclusion.push("jer");
         }
         if (watch_words[i] === "dit") {
           data = data + 1;
+          jokerGet.push("dit");
+          jokerWhy.push("dit");
+          jokerConclusion.push("dit");
         }
         if (watch_words[i] === "deres") {
           data = data + 1;
+          jokerGet.push("deres");
+          jokerWhy.push("deres");
+          jokerConclusion.push("deres");
         }
         if (watch_words[i] === "You") {
           data = data + 1;
+          jokerGet.push("You");
+          jokerWhy.push("You");
+          jokerConclusion.push("You");
         }
         if (watch_words[i] === "Dig") {
           data = data + 1;
+          jokerGet.push("Dig");
+          jokerWhy.push("Dig");
+          jokerConclusion.push("Dig");
         }
         if (watch_words[i] === "Du") {
           data = data + 1;
+          jokerGet.push("Du");
+          jokerWhy.push("Du");
+          jokerConclusion.push("Du");
         }
         if (watch_words[i] === "Jer") {
           data = data + 1;
+          jokerGet.push("Jer");
+          jokerWhy.push("Jer");
+          jokerConclusion.push("Jer");
         }
         if (watch_words[i] === "Dit") {
           data = data + 1;
+          jokerGet.push("Dit");
+          jokerWhy.push("Dit");
+          jokerConclusion.push("Dit");
         }
         if (watch_words[i] === "Deres") {
           data = data + 1;
+          jokerGet.push("Deres");
+          jokerWhy.push("Deres");
+          jokerConclusion.push("Deres");
         }
         if (watch_words[i] === "YOU") {
           data = data + 1;
+          jokerGet.push("YOU");
+          jokerWhy.push("YOU");
+          jokerConclusion.push("YOU");
         }
         if (watch_words[i] === "DIG") {
           data = data + 1;
+          jokerGet.push("DIG");
+          jokerWhy.push("DIG");
+          jokerConclusion.push("DIG");
         }
         if (watch_words[i] === "DU") {
           data = data + 1;
+          jokerGet.push("DU");
+          jokerWhy.push("DU");
+          jokerConclusion.push("DU");
         }
         if (watch_words[i] === "JER") {
           data = data + 1;
+          jokerGet.push("JER");
+          jokerWhy.push("JER");
+          jokerConclusion.push("JER");
         }
         if (watch_words[i] === "DIT") {
           data = data + 1;
+          jokerGet.push("DIT");
+          jokerWhy.push("DIT");
+          jokerConclusion.push("DIT");
         }
         if (watch_words[i] === "DERES") {
           data = data + 1;
+          jokerGet.push("DERES");
+          jokerWhy.push("DERES");
+          jokerConclusion.push("DERES");
         }
       }
       if (jName === "joker") {
         setJokerMatchCount(data);
       } else if (jName === "get") {
         setGetMatchCount(data);
+        setMatchGet(jokerGet);
       } else if (jName === "why") {
         setWhyMatchCount(data);
+        setMatchWhy(jokerWhy);
       } else if (jName === "conclusion") {
         setConclusionMatchCount(data);
+        setMatchConclusion(jokerConclusion);
       } else if (jName === "explanation") {
         setExplanationMatchCount(data);
       }
