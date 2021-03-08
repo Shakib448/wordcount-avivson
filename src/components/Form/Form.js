@@ -92,10 +92,8 @@ const Form = () => {
   const [matchGet, setMatchGet] = useState([]);
   const [matchWhy, setMatchWhy] = useState([]);
   const [matchConclusion, setMatchConclusion] = useState([]);
-  const [copyData, setCopyData] = useState([]);
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
-  console.log(fullData);
 
   const matchWords = matchGet.concat(matchWhy).concat(matchConclusion);
   let unique = [...new Set(matchWords)];
@@ -498,7 +496,7 @@ const Form = () => {
                   </List>
                 </Grid>
               </Grid>
-              <CopyToClipboard text={fullData}>
+              <CopyToClipboard text={fullData?.join(" ")}>
                 <Button
                   className={classes.copyBtn}
                   variant="contained"
