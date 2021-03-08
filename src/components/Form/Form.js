@@ -89,10 +89,11 @@ const Form = () => {
   const [whyMatchCount, setWhyMatchCount] = useState(0);
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
-  const [copyData, setCopyData] = useState();
   const [matchGet, setMatchGet] = useState([]);
   const [matchWhy, setMatchWhy] = useState([]);
   const [matchConclusion, setMatchConclusion] = useState([]);
+
+  const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
   const matchWords = matchGet.concat(matchWhy).concat(matchConclusion);
   let unique = [...new Set(matchWords)];
@@ -100,7 +101,8 @@ const Form = () => {
   // const { register, handleSubmit } = useForm();
   const { handleSubmit } = useForm();
   const onSubmit = (data) => {
-    setCopyData([data.get, data.why, data.conclusion, data.explanation]);
+    // setCopyData([data.get, data.why, data.conclusion, data.explanation]);
+    console.log(data);
   };
 
   const wordCount = (text, name) => {
@@ -305,6 +307,7 @@ const Form = () => {
                   <Input
                     className={classes.formControl}
                     value={unique.join(" ,")}
+                    onChange={(e) => wordCount(e.target.value, "joker")}
                   />
                 </FormControl>
                 <FormControl>
@@ -493,7 +496,7 @@ const Form = () => {
                   </List>
                 </Grid>
               </Grid>
-              <CopyToClipboard text={copyData}>
+              <CopyToClipboard text={fullData?.join(" ")}>
                 <Button
                   className={classes.copyBtn}
                   variant="contained"
