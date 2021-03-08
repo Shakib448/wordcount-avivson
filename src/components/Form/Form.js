@@ -2,12 +2,14 @@ import {
   Container,
   Grid,
   FormGroup,
-  TextField,
+  // TextField,
   Typography,
   Button,
   List,
   ListItem,
   FormControl,
+  Input,
+  InputLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -95,9 +97,8 @@ const Form = () => {
   const matchWords = matchGet.concat(matchWhy).concat(matchConclusion);
   let unique = [...new Set(matchWords)];
 
-  console.log(unique);
-
-  const { register, handleSubmit } = useForm();
+  // const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const onSubmit = (data) => {
     setCopyData([data.get, data.why, data.conclusion, data.explanation]);
   };
@@ -297,57 +298,101 @@ const Form = () => {
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
                 <FormControl>
-                  <TextField
-                    id="outlined-basic"
-                    label="Count of joker words with first 70 words"
-                    variant="outlined"
-                    className={classes.formControl}
-                    defaultValue={unique?.join(" ,")}
-                    value={unique.join(" ,")}
-                    // name="joker"
-                    // onChange={(e) => wordCount(e.target.value, "joker")}
-                  />
+                  <InputLabel>
+                    Count of joker words with first 70 words
+                  </InputLabel>
 
-                  <TextField
-                    id="outlined-basic"
-                    label="What You Get 3 sec.7 words"
-                    variant="outlined"
+                  <Input
                     className={classes.formControl}
-                    name="get"
-                    inputRef={register}
+                    value={unique.join(" ,")}
+                  />
+                </FormControl>
+                <FormControl>
+                  <InputLabel>What You Get 3 sec.7 words</InputLabel>
+
+                  <Input
+                    className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "get")}
                   />
-                  <TextField
-                    id="outlined-basic"
-                    label="Why You? 5 sec. 12 words"
-                    variant="outlined"
-                    name="why"
-                    inputRef={register}
+                </FormControl>
+                <FormControl>
+                  <InputLabel>Why You? 5 sec. 12 words</InputLabel>
+
+                  <Input
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "why")}
                   />
-                  <TextField
-                    id="outlined-basic"
-                    label="Conclusion 7 sec. 17 words"
-                    variant="outlined"
-                    name="conclusion"
-                    inputRef={register}
+                </FormControl>
+                <FormControl>
+                  <InputLabel>Conclusion 7 sec. 17 words</InputLabel>
+
+                  <Input
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
                   />
-                  <TextField
-                    id="outlined-basic"
-                    label="Explanation"
+                </FormControl>
+                <FormControl>
+                  <InputLabel>Explanation</InputLabel>
+
+                  <Input
+                    className={classes.formControl}
                     multiline
                     rows={4}
                     rowsMax={8}
-                    variant="outlined"
-                    name="explanation"
-                    inputRef={register}
-                    className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "explanation")}
                   />
                 </FormControl>
+
+                {/* <TextField
+                  id="outlined-basic"
+                  label="Count of joker words with first 70 words"
+                  variant="outlined"
+                  className={classes.formControl}
+                  defaultValue={unique?.join(" ,")}
+                  value={unique.join(" ,")}
+                  // name="joker"
+                  // onChange={(e) => wordCount(e.target.value, "joker")}
+                /> */}
+
+                {/* <TextField
+                  id="outlined-basic"
+                  label="What You Get 3 sec.7 words"
+                  variant="outlined"
+                  className={classes.formControl}
+                  name="get"
+                  inputRef={register}
+                  onChange={(e) => wordCount(e.target.value, "get")}
+                /> */}
+                {/* <TextField
+                  id="outlined-basic"
+                  label="Why You? 5 sec. 12 words"
+                  variant="outlined"
+                  name="why"
+                  inputRef={register}
+                  className={classes.formControl}
+                  onChange={(e) => wordCount(e.target.value, "why")}
+                /> */}
+                {/* <TextField
+                  id="outlined-basic"
+                  label="Conclusion 7 sec. 17 words"
+                  variant="outlined"
+                  name="conclusion"
+                  inputRef={register}
+                  className={classes.formControl}
+                  onChange={(e) => wordCount(e.target.value, "conclusion")}
+                /> */}
+                {/* <TextField
+                  id="outlined-basic"
+                  label="Explanation"
+                  multiline
+                  rows={4}
+                  rowsMax={8}
+                  variant="outlined"
+                  name="explanation"
+                  inputRef={register}
+                  className={classes.formControl}
+                  onChange={(e) => wordCount(e.target.value, "explanation")}
+                /> */}
               </FormGroup>
             </Grid>
             <Grid
