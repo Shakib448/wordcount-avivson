@@ -340,6 +340,9 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
                     name="conclusion"
+                    multiline
+                    rows={2}
+                    rowsMax={4}
                     inputRef={register}
                   />
                 </FormControl>
