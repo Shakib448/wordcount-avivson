@@ -6,7 +6,8 @@ const styles = (theme) => ({
       outline: 0,
     },
     "h1,h2,h3,h4,h5,h6": {
-      fontFamily: "Lato, sans-serif !important",
+      fontFamily: "Lato, sans-serif ",
+      fontWeight: "bold",
     },
     "h1, h2": {
       fontWeight: 400,
@@ -102,6 +103,7 @@ const styles = (theme) => ({
     ".MuiInputLabel-animated": {
       fontSize: "17px",
       fontWeight: "bold",
+      fontFamily: "Lato, sans-serif ",
       [theme.breakpoints.down("sm")]: {
         fontSize: "12px",
       },
@@ -112,6 +114,10 @@ const styles = (theme) => ({
       [theme.breakpoints.down("sm")]: {
         fontSize: "12px",
       },
+    },
+    ".MuiButton-containedPrimary": {
+      fontFamily: "Lato, sans-serif ",
+      fontWeight: "bold",
     },
   },
 });
