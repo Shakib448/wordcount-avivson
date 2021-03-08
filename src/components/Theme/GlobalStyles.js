@@ -99,8 +99,15 @@ const styles = (theme) => ({
     ".MuiInput-input": {
       paddingLeft: "10px !important",
     },
-    ".MuiInputLabel-outlined": {
+    ".MuiInputLabel-animated": {
       fontSize: "17px",
+      fontWeight: "bold",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "12px",
+      },
+    },
+    ".MuiInputLabel-outlined": {
+      fontSize: "15px",
       fontWeight: "bold",
       [theme.breakpoints.down("sm")]: {
         fontSize: "12px",
