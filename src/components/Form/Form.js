@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 const Form = () => {
   const classes = useStyles();
 
+  const [joker, setJoker] = useState("");
   const [{ get }, setGet] = useState("");
   const [{ why }, setWhy] = useState("");
   const [{ conclusion }, setConclusion] = useState("");
@@ -107,7 +108,9 @@ const Form = () => {
   };
 
   const wordCount = (text, name) => {
-    if (name === "get") {
+    if (name === "joker") {
+      setJoker(text);
+    } else if (name === "get") {
       setTimeout(() => {
         watchWords(text, name);
       }, 3000);
@@ -157,11 +160,22 @@ const Form = () => {
       "DIT",
       "DERES",
     ];
+    let findData = [];
+    const addJokerData = watch_words.concat(joker?.split(" "));
+
+    const dataFinding = fullData?.find((item) => item === addJokerData);
+    console.log(dataFinding);
+    if (findData !== undefined) {
+      findData.push(dataFinding);
+      console.log(findData);
+    }
+
     let data = 0;
     let jokerGet = [];
     let jokerWhy = [];
     let jokerConclusion = [];
     let jokerExplanation = [];
+
     for (let i = 0; i < watch_words.length; i++) {
       if (~wData.indexOf(watch_words[i])) {
         if (watch_words[i] === "you") {
@@ -333,11 +347,7 @@ const Form = () => {
                   </InputLabel>
                   <Input
                     className={classes.formControl}
-                    // value={
-                    //   unique?.length > 0
-                    //     ? unique.join(" ,")
-                    //     : savedJokerData.joker
-                    // }
+                    value={unique.join(" ,")}
                     // defaultValue={
                     //   unique?.length > 0
                     //     ? unique.join(" ,")
