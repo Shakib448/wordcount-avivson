@@ -86,23 +86,28 @@ const Form = () => {
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
   const [matchGet, setMatchGet] = useState([]);
+  console.log(matchGet);
   const [matchWhy, setMatchWhy] = useState([]);
+  console.log(matchWhy);
+
   const [matchConclusion, setMatchConclusion] = useState([]);
+  console.log(matchConclusion);
   const [matchExplanation, setMatchExplanation] = useState([]);
+  console.log(matchExplanation);
   const [explanationData, setExplanationData] = useState("");
+  console.log(explanationData);
+
   // const myJokerData = localStorage.getItem("myJokerWords");
   // const savedJokerData = JSON.parse(myJokerData);
   // console.log(savedJokerData);
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
-  console.log(get);
-
   const matchWords = matchGet
     .concat(matchWhy)
     .concat(matchConclusion)
     .concat(matchExplanation);
-  let unique = [...new Set(matchWords)];
+  // let unique = [...new Set(matchWords)];
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
@@ -140,15 +145,6 @@ const Form = () => {
       });
     }
   };
-
-  // const addJokerData = watch_words.concat(joker?.split(" "));
-  // const isIncluded = fullData?.filter((value) =>
-  //   addJokerData?.includes(value)
-  // );
-  // if (isIncluded) {
-  //   let uniques = [...new Set(isIncluded)];
-  //   setUniqueWords(uniques);
-  // }
 
   const watchWords = (wData, jName) => {
     const watch_words = [
@@ -307,6 +303,13 @@ const Form = () => {
           jokerExplanation.push("DERES");
         }
       }
+      // const addJokerData = watch_words.concat(joker?.split(" "));
+      // const isIncluded = watch_words?.filter((value) =>
+      //   fullData?.includes(value)
+      // );
+      // if (isIncluded) {
+      //   setMatchGet(isIncluded);
+      // }
       if (jName === "get") {
         setGetMatchCount(data);
         setMatchGet(jokerGet);
@@ -468,39 +471,39 @@ const Form = () => {
                   <List>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: unique?.length >= 5,
-                        [classes.countItemsNotOk]: fullData?.length >= 70,
+                        [classes.countItemsOk]: matchWords?.length >= 5,
+                        [classes.countItemsNotOk]: fullData?.length >= 71,
                       })}
                     >
-                      {unique?.length}
+                      {matchWords?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: getMatchCount !== 0,
                       })}
                     >
-                      {getMatchCount}
+                      {matchGet?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: whyMatchCount !== 0,
                       })}
                     >
-                      {whyMatchCount}
+                      {matchWhy?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: conclusionMatchCount !== 0,
                       })}
                     >
-                      {conclusionMatchCount}
+                      {matchConclusion?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: explanationMatchCount !== 0,
                       })}
                     >
-                      {explanationMatchCount}
+                      {matchExplanation?.length}
                     </ListItem>
                   </List>
                 </Grid>
