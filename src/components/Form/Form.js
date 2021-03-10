@@ -96,6 +96,8 @@ const Form = () => {
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
+  console.log(get);
+
   const matchWords = matchGet
     .concat(matchWhy)
     .concat(matchConclusion)
@@ -169,7 +171,6 @@ const Form = () => {
       "DIT",
       "DERES",
     ];
-    const addJokerData = watch_words.concat(joker?.split(" "));
 
     let data = 0;
     let jokerGet = [];
@@ -348,7 +349,7 @@ const Form = () => {
                   </InputLabel>
                   <Input
                     className={classes.formControl}
-                    value={unique.join(" ,")}
+                    // value={unique.join(" ,")}
                     // defaultValue={
                     //   unique?.length > 0
                     //     ? unique.join(" ,")
@@ -425,7 +426,10 @@ const Form = () => {
                 <Grid container justify="center">
                   <List>
                     <ListItem className={clsx(classes.countItems)}>
-                      {lengthCount(fullData)}
+                      {lengthCount(get) +
+                        lengthCount(why) +
+                        lengthCount(conclusion) +
+                        lengthCount(explanation)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
