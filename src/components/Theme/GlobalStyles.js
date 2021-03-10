@@ -6,7 +6,7 @@ const styles = (theme) => ({
       outline: 0,
     },
     "h1,h2,h3,h4,h5,h6": {
-      fontFamily: "Lato, sans-serif ",
+      fontFamily: "Lato, sans-serif  !important",
       fontWeight: "bold",
     },
     "h1, h2": {

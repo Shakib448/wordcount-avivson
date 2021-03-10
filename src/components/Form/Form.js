@@ -139,6 +139,15 @@ const Form = () => {
     }
   };
 
+  // const addJokerData = watch_words.concat(joker?.split(" "));
+  // const isIncluded = fullData?.filter((value) =>
+  //   addJokerData?.includes(value)
+  // );
+  // if (isIncluded) {
+  //   let uniques = [...new Set(isIncluded)];
+  //   setUniqueWords(uniques);
+  // }
+
   const watchWords = (wData, jName) => {
     const watch_words = [
       "You",
@@ -160,15 +169,7 @@ const Form = () => {
       "DIT",
       "DERES",
     ];
-    let findData = [];
     const addJokerData = watch_words.concat(joker?.split(" "));
-
-    const dataFinding = fullData?.find((item) => item === addJokerData);
-    console.log(dataFinding);
-    if (findData !== undefined) {
-      findData.push(dataFinding);
-      console.log(findData);
-    }
 
     let data = 0;
     let jokerGet = [];
@@ -422,8 +423,10 @@ const Form = () => {
               <Grid item>
                 <Typography variant="h5">Word Count</Typography>
                 <Grid container justify="center">
-                  <List style={{ marginTop: "35px" }}>
-                    <ListItem className={clsx(classes.countItems)}></ListItem>
+                  <List>
+                    <ListItem className={clsx(classes.countItems)}>
+                      {lengthCount(fullData)}
+                    </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: get?.length >= 7,
