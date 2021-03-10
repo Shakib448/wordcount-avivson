@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 const Form = () => {
   const classes = useStyles();
 
+  const [joker, setJoker] = useState("");
   const [{ get }, setGet] = useState("");
   const [{ why }, setWhy] = useState("");
   const [{ conclusion }, setConclusion] = useState("");
@@ -86,20 +87,32 @@ const Form = () => {
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
   const [matchGet, setMatchGet] = useState([]);
   const [matchWhy, setMatchWhy] = useState([]);
-  const [matchConclusion, setMatchConclusion] = useState([]);
 
+  const [matchConclusion, setMatchConclusion] = useState([]);
+  const [matchExplanation, setMatchExplanation] = useState([]);
   const [explanationData, setExplanationData] = useState("");
+
+  // const myJokerData = localStorage.getItem("myJokerWords");
+  // const savedJokerData = JSON.parse(myJokerData);
+  // console.log(savedJokerData);
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
-  const matchWords = matchGet.concat(matchWhy).concat(matchConclusion);
+  const matchWords = matchGet
+    .concat(matchWhy)
+    .concat(matchConclusion)
+    .concat(matchExplanation);
   let unique = [...new Set(matchWords)];
 
   const { handleSubmit, register } = useForm();
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    // localStorage.setItem("myJokerWords", JSON.stringify(data));
+  };
 
   const wordCount = (text, name) => {
-    if (name === "get") {
+    if (name === "joker") {
+      setJoker(text);
+    } else if (name === "get") {
       setTimeout(() => {
         watchWords(text, name);
       }, 3000);
@@ -149,10 +162,22 @@ const Form = () => {
       "DIT",
       "DERES",
     ];
+
+    const addJokerData = watch_words.concat(joker?.split(" "));
+    const isIncluded = fullData?.filter((value) =>
+      addJokerData.includes(value)
+    );
+
+    console.log(isIncluded);
+    const test = isIncluded?.map((value) => value);
+    console.log(test);
+
     let data = 0;
     let jokerGet = [];
     let jokerWhy = [];
     let jokerConclusion = [];
+    let jokerExplanation = [];
+
     for (let i = 0; i < watch_words.length; i++) {
       if (~wData.indexOf(watch_words[i])) {
         if (watch_words[i] === "you") {
@@ -160,110 +185,129 @@ const Form = () => {
           jokerGet.push("you");
           jokerWhy.push("you");
           jokerConclusion.push("you");
+          jokerExplanation.push("you");
         }
         if (watch_words[i] === "dig") {
           data = data + 1;
           jokerGet.push("dig");
           jokerWhy.push("dig");
           jokerConclusion.push("dig");
+          jokerExplanation.push("dig");
         }
         if (watch_words[i] === "du") {
           data = data + 1;
           jokerGet.push("du");
           jokerWhy.push("du");
           jokerConclusion.push("du");
+          jokerExplanation.push("du");
         }
         if (watch_words[i] === "jer") {
           data = data + 1;
           jokerGet.push("jer");
           jokerWhy.push("jer");
           jokerConclusion.push("jer");
+          jokerExplanation.push("jer");
         }
         if (watch_words[i] === "dit") {
           data = data + 1;
           jokerGet.push("dit");
           jokerWhy.push("dit");
           jokerConclusion.push("dit");
+          jokerExplanation.push("dit");
         }
         if (watch_words[i] === "deres") {
           data = data + 1;
           jokerGet.push("deres");
           jokerWhy.push("deres");
           jokerConclusion.push("deres");
+          jokerExplanation.push("deres");
         }
         if (watch_words[i] === "You") {
           data = data + 1;
           jokerGet.push("You");
           jokerWhy.push("You");
           jokerConclusion.push("You");
+          jokerExplanation.push("You");
         }
         if (watch_words[i] === "Dig") {
           data = data + 1;
           jokerGet.push("Dig");
           jokerWhy.push("Dig");
           jokerConclusion.push("Dig");
+          jokerExplanation.push("Dig");
         }
         if (watch_words[i] === "Du") {
           data = data + 1;
           jokerGet.push("Du");
           jokerWhy.push("Du");
           jokerConclusion.push("Du");
+          jokerExplanation.push("Du");
         }
         if (watch_words[i] === "Jer") {
           data = data + 1;
           jokerGet.push("Jer");
           jokerWhy.push("Jer");
           jokerConclusion.push("Jer");
+          jokerExplanation.push("Jer");
         }
         if (watch_words[i] === "Dit") {
           data = data + 1;
           jokerGet.push("Dit");
           jokerWhy.push("Dit");
           jokerConclusion.push("Dit");
+          jokerExplanation.push("Dit");
         }
         if (watch_words[i] === "Deres") {
           data = data + 1;
           jokerGet.push("Deres");
           jokerWhy.push("Deres");
           jokerConclusion.push("Deres");
+          jokerExplanation.push("Deres");
         }
         if (watch_words[i] === "YOU") {
           data = data + 1;
           jokerGet.push("YOU");
           jokerWhy.push("YOU");
           jokerConclusion.push("YOU");
+          jokerExplanation.push("YOU");
         }
         if (watch_words[i] === "DIG") {
           data = data + 1;
           jokerGet.push("DIG");
           jokerWhy.push("DIG");
           jokerConclusion.push("DIG");
+          jokerExplanation.push("DIG");
         }
         if (watch_words[i] === "DU") {
           data = data + 1;
           jokerGet.push("DU");
           jokerWhy.push("DU");
           jokerConclusion.push("DU");
+          jokerExplanation.push("DU");
         }
         if (watch_words[i] === "JER") {
           data = data + 1;
           jokerGet.push("JER");
           jokerWhy.push("JER");
           jokerConclusion.push("JER");
+          jokerExplanation.push("JER");
         }
         if (watch_words[i] === "DIT") {
           data = data + 1;
           jokerGet.push("DIT");
           jokerWhy.push("DIT");
           jokerConclusion.push("DIT");
+          jokerExplanation.push("DIT");
         }
         if (watch_words[i] === "DERES") {
           data = data + 1;
           jokerGet.push("DERES");
           jokerWhy.push("DERES");
           jokerConclusion.push("DERES");
+          jokerExplanation.push("DERES");
         }
       }
+
       if (jName === "get") {
         setGetMatchCount(data);
         setMatchGet(jokerGet);
@@ -275,11 +319,10 @@ const Form = () => {
         setMatchConclusion(jokerConclusion);
       } else if (jName === "explanation") {
         setExplanationMatchCount(data);
+        setMatchExplanation(jokerExplanation);
       }
     }
   };
-
-  console.log(explanationData?.toString());
 
   function copyToClipBoard() {
     const str = document.getElementById("data")?.innerText;
@@ -308,8 +351,13 @@ const Form = () => {
                   <Input
                     className={classes.formControl}
                     value={unique.join(" ,")}
+                    // defaultValue={
+                    //   unique?.length > 0
+                    //     ? unique.join(" ,")
+                    //     : savedJokerData.joker
+                    // }
                     onChange={(e) => wordCount(e.target.value, "joker")}
-                    name="get"
+                    name="joker"
                     inputRef={register}
                   />
                 </FormControl>
@@ -320,6 +368,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "get")}
                     name="get"
+                    // defaultValue={savedJokerData.get}
                     inputRef={register}
                   />
                 </FormControl>
@@ -330,6 +379,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "why")}
                     name="why"
+                    // defaultValue={savedJokerData.why}
                     inputRef={register}
                   />
                 </FormControl>
@@ -340,6 +390,10 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
                     name="conclusion"
+                    // defaultValue={savedJokerData.conclusion}
+                    multiline
+                    rows={2}
+                    rowsMax={4}
                     inputRef={register}
                   />
                 </FormControl>
@@ -353,6 +407,7 @@ const Form = () => {
                     rowsMax={8}
                     onChange={(e) => wordCount(e.target.value, "explanation")}
                     name="explanation"
+                    // defaultValue={savedJokerData.explanation}
                     inputRef={register}
                   />
                 </FormControl>
@@ -370,8 +425,13 @@ const Form = () => {
               <Grid item>
                 <Typography variant="h5">Word Count</Typography>
                 <Grid container justify="center">
-                  <List style={{ marginTop: "35px" }}>
-                    <ListItem className={clsx(classes.countItems)}></ListItem>
+                  <List>
+                    <ListItem className={clsx(classes.countItems)}>
+                      {lengthCount(get) +
+                        lengthCount(why) +
+                        lengthCount(conclusion) +
+                        lengthCount(explanation)}
+                    </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: get?.length >= 7,
@@ -409,39 +469,39 @@ const Form = () => {
                   <List>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: unique?.length >= 5,
-                        [classes.countItemsNotOk]: fullData?.length >= 70,
+                        [classes.countItemsOk]: matchWords?.length >= 5,
+                        [classes.countItemsNotOk]: fullData?.length >= 71,
                       })}
                     >
-                      {unique?.length}
+                      {matchWords?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: getMatchCount !== 0,
                       })}
                     >
-                      {getMatchCount}
+                      {matchGet?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: whyMatchCount !== 0,
                       })}
                     >
-                      {whyMatchCount}
+                      {matchWhy?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: conclusionMatchCount !== 0,
                       })}
                     >
-                      {conclusionMatchCount}
+                      {matchConclusion?.length}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: explanationMatchCount !== 0,
                       })}
                     >
-                      {explanationMatchCount}
+                      {matchExplanation?.length}
                     </ListItem>
                   </List>
                 </Grid>
