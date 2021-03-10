@@ -86,16 +86,11 @@ const Form = () => {
   const [conclusionMatchCount, setConclusionMatchCount] = useState(0);
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
   const [matchGet, setMatchGet] = useState([]);
-  console.log(matchGet);
   const [matchWhy, setMatchWhy] = useState([]);
-  console.log(matchWhy);
 
   const [matchConclusion, setMatchConclusion] = useState([]);
-  console.log(matchConclusion);
   const [matchExplanation, setMatchExplanation] = useState([]);
-  console.log(matchExplanation);
   const [explanationData, setExplanationData] = useState("");
-  console.log(explanationData);
 
   // const myJokerData = localStorage.getItem("myJokerWords");
   // const savedJokerData = JSON.parse(myJokerData);
@@ -107,7 +102,7 @@ const Form = () => {
     .concat(matchWhy)
     .concat(matchConclusion)
     .concat(matchExplanation);
-  // let unique = [...new Set(matchWords)];
+  let unique = [...new Set(matchWords)];
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
@@ -167,6 +162,15 @@ const Form = () => {
       "DIT",
       "DERES",
     ];
+
+    const addJokerData = watch_words.concat(joker?.split(" "));
+    const isIncluded = fullData?.filter((value) =>
+      addJokerData.includes(value)
+    );
+
+    console.log(isIncluded);
+    const test = isIncluded?.map((value) => value);
+    console.log(test);
 
     let data = 0;
     let jokerGet = [];
@@ -303,13 +307,7 @@ const Form = () => {
           jokerExplanation.push("DERES");
         }
       }
-      // const addJokerData = watch_words.concat(joker?.split(" "));
-      // const isIncluded = watch_words?.filter((value) =>
-      //   fullData?.includes(value)
-      // );
-      // if (isIncluded) {
-      //   setMatchGet(isIncluded);
-      // }
+
       if (jName === "get") {
         setGetMatchCount(data);
         setMatchGet(jokerGet);
@@ -352,7 +350,7 @@ const Form = () => {
                   </InputLabel>
                   <Input
                     className={classes.formControl}
-                    // value={unique.join(" ,")}
+                    value={unique.join(" ,")}
                     // defaultValue={
                     //   unique?.length > 0
                     //     ? unique.join(" ,")
