@@ -331,7 +331,6 @@ const Form = () => {
                         [classes.countItemsNotOk]: fullData?.length >= 71,
                       })}
                     >
-                      {/* {lengthCount(jokerMatch)} */}
                       {totalJokerCount}
                     </ListItem>
                     <ListItem
