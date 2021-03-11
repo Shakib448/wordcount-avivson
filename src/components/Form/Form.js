@@ -78,6 +78,7 @@ const Form = () => {
 
   const [joker, setJoker] = useState("");
   const [{ get }, setGet] = useState("");
+
   const [{ why }, setWhy] = useState("");
   const [{ conclusion }, setConclusion] = useState("");
   const [{ explanation }, setExplanation] = useState("");
@@ -87,10 +88,20 @@ const Form = () => {
   const [explanationMatchCount, setExplanationMatchCount] = useState(0);
   const [matchGet, setMatchGet] = useState([]);
   const [matchWhy, setMatchWhy] = useState([]);
-
   const [matchConclusion, setMatchConclusion] = useState([]);
   const [matchExplanation, setMatchExplanation] = useState([]);
   const [explanationData, setExplanationData] = useState("");
+
+  const [getCount, setGetCount] = useState([]);
+  console.log(getCount);
+  const [whyCount, setWhyCount] = useState([]);
+  console.log(whyCount);
+
+  const [conclusionCount, setConclusionCount] = useState([]);
+  console.log(conclusionCount);
+
+  const [explanationCount, setExplanationCount] = useState([]);
+  console.log(explanationCount);
 
   // const myJokerData = localStorage.getItem("myJokerWords");
   // const savedJokerData = JSON.parse(myJokerData);
@@ -163,14 +174,29 @@ const Form = () => {
       "DERES",
     ];
 
-    const addJokerData = watch_words.concat(joker?.split(" "));
-    const isIncluded = fullData?.filter((value) =>
-      addJokerData.includes(value)
-    );
+    // const addJokerData = watch_words.concat(joker?.split(" "));
+    // const isIncluded = fullData?.filter((value) =>
+    //   addJokerData.includes(value)
+    // );
 
-    console.log(isIncluded);
-    const test = isIncluded?.map((value) => value);
-    console.log(test);
+    // console.log(isIncluded);
+    // const test = isIncluded?.map((value) => value);
+    // console.log(test);
+
+    const isGet = get?.filter((value) => watch_words.includes(value));
+    setGetCount(isGet);
+    const isWhy = why?.filter((value) => watch_words.includes(value));
+    setWhyCount(isWhy);
+
+    const isConclusion = conclusion?.filter((value) =>
+      watch_words.includes(value)
+    );
+    setConclusionCount(isConclusion);
+
+    const isExplanation = explanation?.filter((value) =>
+      watch_words.includes(value)
+    );
+    setExplanationCount(isExplanation);
 
     let data = 0;
     let jokerGet = [];
@@ -480,28 +506,28 @@ const Form = () => {
                         [classes.countItemsOk]: getMatchCount !== 0,
                       })}
                     >
-                      {matchGet?.length}
+                      {lengthCount(getCount)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: whyMatchCount !== 0,
                       })}
                     >
-                      {matchWhy?.length}
+                      {lengthCount(whyCount)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: conclusionMatchCount !== 0,
                       })}
                     >
-                      {matchConclusion?.length}
+                      {lengthCount(conclusionCount)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: explanationMatchCount !== 0,
                       })}
                     >
-                      {matchExplanation?.length}
+                      {lengthCount(explanationCount)}
                     </ListItem>
                   </List>
                 </Grid>
