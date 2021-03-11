@@ -410,7 +410,6 @@ const Form = () => {
                 className={classes.delete}
                 variant="contained"
                 color="primary"
-                type="submit"
                 onClick={deleteContent}
               >
                 Delete Content
