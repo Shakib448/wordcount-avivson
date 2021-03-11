@@ -9,9 +9,12 @@ import {
   FormControl,
   Input,
   InputLabel,
-  ButtonGroup,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
 import clsx from "clsx";
 import { useState } from "react";
 import { lengthCount, textData } from "../../Utils/Utils";
@@ -30,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     marginBottom: "15px",
+    width: "100%",
   },
   countArea: {
     position: "relative",
@@ -72,22 +76,30 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: 25,
     },
   },
-  save: {
-    margin: "20px",
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 40,
-    },
+  according: {
+    background: "transparent",
   },
-  delete: {
-    margin: "20px",
-    backgroundColor: "red",
-    "&:hover": {
-      backgroundColor: "red",
-    },
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 40,
-    },
+  accordingDetails: {
+    display: "flex",
+    flexDirection: "column",
   },
+
+  // save: {
+  //   margin: "20px",
+  //   [theme.breakpoints.down("sm")]: {
+  //     marginTop: 40,
+  //   },
+  // },
+  // delete: {
+  //   margin: "20px",
+  //   backgroundColor: "red",
+  //   "&:hover": {
+  //     backgroundColor: "red",
+  //   },
+  //   [theme.breakpoints.down("sm")]: {
+  //     marginTop: 40,
+  //   },
+  // },
 }));
 
 const Form = () => {
@@ -119,17 +131,17 @@ const Form = () => {
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
-    localStorage.setItem("myJokerWords", JSON.stringify(data));
+    // localStorage.setItem("myJokerWords", JSON.stringify(data));
   };
 
-  const deleteContent = () => {
-    if (savedJokerData !== null) {
-      if (window.confirm("Do you really delete the joker words?")) {
-        localStorage.removeItem("myJokerWords");
-        window.location.reload();
-      }
-    }
-  };
+  // const deleteContent = () => {
+  //   if (savedJokerData !== null) {
+  //     if (window.confirm("Do you really delete the joker words?")) {
+  //       localStorage.removeItem("myJokerWords");
+  //       window.location.reload();
+  //     }
+  //   }
+  // };
 
   const wordCount = (text, name) => {
     if (name === "joker") {
@@ -229,7 +241,46 @@ const Form = () => {
           <Grid container direction="row" justify="center" spacing={8}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
-                <FormControl>
+                <Accordion className={classes.according}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography variant="h5" className={classes.heading}>
+                      Accordion 1
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails className={classes.accordingDetails}>
+                    <FormControl>
+                      <InputLabel>
+                        Count of joker words with first 70 words
+                      </InputLabel>
+                      <Input
+                        className={classes.formControl}
+                        // defaultValue={jokerMatch.join(" ,")}
+                        value={jokerMatch?.join(" ,")}
+                        onChange={(e) => wordCount(e.target.value, "joker")}
+                        name="joker"
+                        inputRef={register}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <InputLabel>
+                        Count of joker words with first 70 words
+                      </InputLabel>
+                      <Input
+                        className={classes.formControl}
+                        // defaultValue={jokerMatch.join(" ,")}
+                        value={jokerMatch?.join(" ,")}
+                        onChange={(e) => wordCount(e.target.value, "joker")}
+                        name="joker"
+                        inputRef={register}
+                      />
+                    </FormControl>
+                  </AccordionDetails>
+                </Accordion>
+                {/* <FormControl>
                   <InputLabel>
                     Count of joker words with first 70 words
                   </InputLabel>
@@ -241,7 +292,7 @@ const Form = () => {
                     name="joker"
                     inputRef={register}
                   />
-                </FormControl>
+                </FormControl> */}
                 <FormControl>
                   <InputLabel>What You Get 3 sec.7 words</InputLabel>
 
@@ -400,8 +451,9 @@ const Form = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid container direction="row" justify="center">
-            <ButtonGroup>
+          {/* <Grid container direction="row" justify="center"> */}
+
+          {/* <ButtonGroup>
               <Button
                 className={classes.save}
                 variant="contained"
@@ -418,8 +470,8 @@ const Form = () => {
               >
                 Delete Content
               </Button>
-            </ButtonGroup>
-          </Grid>
+            </ButtonGroup> */}
+          {/* </Grid> */}
         </form>
         <pre
           id="data"
