@@ -89,6 +89,13 @@ const Form = () => {
   const [explanationCount, setExplanationCount] = useState([]);
   const [jokerMatch, setJokerMatch] = useState([]);
 
+  const totalJokerCount =
+    lengthCount(getCount) +
+    lengthCount(whyCount) +
+    lengthCount(conclusionCount) +
+    lengthCount(explanationCount);
+  console.log(totalJokerCount);
+
   // const myJokerData = localStorage.getItem("myJokerWords");
   // const savedJokerData = JSON.parse(myJokerData);
   // console.log(savedJokerData);
@@ -320,15 +327,12 @@ const Form = () => {
                   <List>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: lengthCount(jokerMatch) >= 5,
+                        [classes.countItemsOk]: totalJokerCount >= 5,
                         [classes.countItemsNotOk]: fullData?.length >= 71,
                       })}
                     >
-                      {lengthCount(jokerMatch)}
-                      {/* {lengthCount(getCount) +
-                        lengthCount(whyCount) +
-                        lengthCount(conclusionCount) +
-                        lengthCount(explanationCount)} */}
+                      {/* {lengthCount(jokerMatch)} */}
+                      {totalJokerCount}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
