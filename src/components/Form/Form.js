@@ -410,14 +410,16 @@ const Form = () => {
               >
                 Save Content
               </Button>
-              <Button
-                className={classes.delete}
-                variant="contained"
-                color="primary"
-                onClick={deleteContent}
-              >
-                Delete Content
-              </Button>
+              {savedJokerData !== null && (
+                <Button
+                  className={classes.delete}
+                  variant="contained"
+                  color="primary"
+                  onClick={deleteContent}
+                >
+                  Delete Content
+                </Button>
+              )}
             </ButtonGroup>
           </Grid>
         </form>
