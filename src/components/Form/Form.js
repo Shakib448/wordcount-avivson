@@ -117,6 +117,8 @@ const Form = () => {
   const [conclusionCount, setConclusionCount] = useState([]);
   const [explanationCount, setExplanationCount] = useState([]);
   const [jokerMatch, setJokerMatch] = useState([]);
+  const [jokerAdd, setJokerAdd] = useState([]);
+  console.log(jokerMatch);
 
   const totalJokerCount =
     lengthCount(getCount) +
@@ -124,10 +126,14 @@ const Form = () => {
     lengthCount(conclusionCount) +
     lengthCount(explanationCount);
 
-  const myJokerData = localStorage.getItem("myJokerWords");
-  const savedJokerData = JSON.parse(myJokerData);
+  // const myJokerData = localStorage.getItem("myJokerWords");
+  // const savedJokerData = JSON.parse(myJokerData);
 
-  const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
+  const fullData = get
+    ?.concat(why)
+    ?.concat(conclusion)
+    ?.concat(explanation)
+    ?.concat(jokerAdd);
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
@@ -146,6 +152,8 @@ const Form = () => {
   const wordCount = (text, name) => {
     if (name === "joker") {
       setJoker(text);
+    } else if (name === "jokerAdd") {
+      setJokerAdd(text);
     } else if (name === "get") {
       setTimeout(() => {
         watchWords(text, name);
@@ -197,7 +205,9 @@ const Form = () => {
       "DERES",
     ];
 
-    const addJokerData = watch_words.concat(joker?.split(" "));
+    const addJokerData = watch_words
+      .concat(joker?.split(" "))
+      .concat(jokerAdd?.split(" "));
     const isIncluded = fullData?.filter((value) =>
       addJokerData.includes(value)
     );
@@ -268,7 +278,7 @@ const Form = () => {
                       <InputLabel>Add Your Joker Word</InputLabel>
                       <Input
                         className={classes.formControl}
-                        onChange={(e) => wordCount(e.target.value, "joker")}
+                        onChange={(e) => wordCount(e.target.value, "jokerAdd")}
                         name="jokerAdd"
                         inputRef={register}
                       />
@@ -295,7 +305,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "get")}
                     name="get"
-                    defaultValue={savedJokerData?.get}
+                    // defaultValue={savedJokerData?.get}
                     inputRef={register}
                   />
                 </FormControl>
@@ -306,7 +316,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "why")}
                     name="why"
-                    defaultValue={savedJokerData?.why}
+                    // defaultValue={savedJokerData?.why}
                     inputRef={register}
                   />
                 </FormControl>
@@ -317,7 +327,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
                     name="conclusion"
-                    defaultValue={savedJokerData?.conclusion}
+                    // defaultValue={savedJokerData?.conclusion}
                     multiline
                     rows={2}
                     rowsMax={4}
@@ -334,7 +344,7 @@ const Form = () => {
                     rowsMax={8}
                     onChange={(e) => wordCount(e.target.value, "explanation")}
                     name="explanation"
-                    defaultValue={savedJokerData?.explanation}
+                    // defaultValue={savedJokerData?.explanation}
                     inputRef={register}
                   />
                 </FormControl>
