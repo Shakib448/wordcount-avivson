@@ -175,7 +175,7 @@ const Form = () => {
 
     const addJokerData = watch_words
       .concat(joker?.split(" "))
-      .concat(jokerAdd?.split(" "));
+      .concat(jokerAdd?.toString().split(" "));
     const isIncluded = fullData?.filter((value) =>
       addJokerData.includes(value)
     );
