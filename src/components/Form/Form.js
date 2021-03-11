@@ -9,6 +9,7 @@ import {
   FormControl,
   Input,
   InputLabel,
+  ButtonGroup,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -71,6 +72,16 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: 25,
     },
   },
+  save: {
+    margin: "20px",
+  },
+  delete: {
+    margin: "20px",
+    backgroundColor: "red",
+    "&:hover": {
+      backgroundColor: "red",
+    },
+  },
 }));
 
 const Form = () => {
@@ -94,17 +105,16 @@ const Form = () => {
     lengthCount(whyCount) +
     lengthCount(conclusionCount) +
     lengthCount(explanationCount);
-  console.log(totalJokerCount);
 
-  // const myJokerData = localStorage.getItem("myJokerWords");
-  // const savedJokerData = JSON.parse(myJokerData);
-  // console.log(savedJokerData);
+  const myJokerData = localStorage.getItem("myJokerWords");
+  const savedJokerData = JSON.parse(myJokerData);
+  console.log(savedJokerData);
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
-    // localStorage.setItem("myJokerWords", JSON.stringify(data));
+    localStorage.setItem("myJokerWords", JSON.stringify(data));
   };
 
   const wordCount = (text, name) => {
@@ -225,7 +235,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "get")}
                     name="get"
-                    // defaultValue={savedJokerData.get}
+                    defaultValue={savedJokerData?.get}
                     inputRef={register}
                   />
                 </FormControl>
@@ -236,7 +246,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "why")}
                     name="why"
-                    // defaultValue={savedJokerData.why}
+                    defaultValue={savedJokerData?.why}
                     inputRef={register}
                   />
                 </FormControl>
@@ -247,7 +257,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
                     name="conclusion"
-                    // defaultValue={savedJokerData.conclusion}
+                    defaultValue={savedJokerData?.conclusion}
                     multiline
                     rows={2}
                     rowsMax={4}
@@ -264,7 +274,7 @@ const Form = () => {
                     rowsMax={8}
                     onChange={(e) => wordCount(e.target.value, "explanation")}
                     name="explanation"
-                    // defaultValue={savedJokerData.explanation}
+                    defaultValue={savedJokerData?.explanation}
                     inputRef={register}
                   />
                 </FormControl>
@@ -375,6 +385,26 @@ const Form = () => {
                 Copy Content
               </Button>
             </Grid>
+          </Grid>
+          <Grid container direction="row" justify="center">
+            <ButtonGroup>
+              <Button
+                className={classes.save}
+                variant="contained"
+                color="primary"
+                type="submit"
+              >
+                Save Content
+              </Button>
+              <Button
+                className={classes.delete}
+                variant="contained"
+                color="primary"
+                type="submit"
+              >
+                Delete Content
+              </Button>
+            </ButtonGroup>
           </Grid>
         </form>
         <pre
