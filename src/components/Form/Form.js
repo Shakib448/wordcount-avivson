@@ -78,28 +78,12 @@ const useStyles = makeStyles((theme) => ({
   },
   according: {
     background: "transparent",
+    marginBottom: "5px",
   },
   accordingDetails: {
     display: "flex",
     flexDirection: "column",
   },
-
-  // save: {
-  //   margin: "20px",
-  //   [theme.breakpoints.down("sm")]: {
-  //     marginTop: 40,
-  //   },
-  // },
-  // delete: {
-  //   margin: "20px",
-  //   backgroundColor: "red",
-  //   "&:hover": {
-  //     backgroundColor: "red",
-  //   },
-  //   [theme.breakpoints.down("sm")]: {
-  //     marginTop: 40,
-  //   },
-  // },
 }));
 
 const Form = () => {
@@ -107,7 +91,6 @@ const Form = () => {
 
   const [joker, setJoker] = useState("");
   const [{ get }, setGet] = useState("");
-
   const [{ why }, setWhy] = useState("");
   const [{ conclusion }, setConclusion] = useState("");
   const [{ explanation }, setExplanation] = useState("");
@@ -118,16 +101,12 @@ const Form = () => {
   const [explanationCount, setExplanationCount] = useState([]);
   const [jokerMatch, setJokerMatch] = useState([]);
   const [jokerAdd, setJokerAdd] = useState([]);
-  console.log(jokerMatch);
 
   const totalJokerCount =
     lengthCount(getCount) +
     lengthCount(whyCount) +
     lengthCount(conclusionCount) +
     lengthCount(explanationCount);
-
-  // const myJokerData = localStorage.getItem("myJokerWords");
-  // const savedJokerData = JSON.parse(myJokerData);
 
   const fullData = get
     ?.concat(why)
@@ -136,18 +115,7 @@ const Form = () => {
     ?.concat(jokerAdd);
 
   const { handleSubmit, register } = useForm();
-  const onSubmit = (data) => {
-    // localStorage.setItem("myJokerWords", JSON.stringify(data));
-  };
-
-  // const deleteContent = () => {
-  //   if (savedJokerData !== null) {
-  //     if (window.confirm("Do you really delete the joker words?")) {
-  //       localStorage.removeItem("myJokerWords");
-  //       window.location.reload();
-  //     }
-  //   }
-  // };
+  const onSubmit = (data) => {};
 
   const wordCount = (text, name) => {
     if (name === "joker") {
@@ -211,7 +179,6 @@ const Form = () => {
     const isIncluded = fullData?.filter((value) =>
       addJokerData.includes(value)
     );
-    // let unique = [...new Set(isIncluded)];
     setJokerMatch(isIncluded);
 
     const isGet = get?.filter((value) => addJokerData.includes(value));
@@ -285,19 +252,6 @@ const Form = () => {
                     </FormControl>
                   </AccordionDetails>
                 </Accordion>
-                {/* <FormControl>
-                  <InputLabel>
-                    Count of joker words with first 70 words
-                  </InputLabel>
-                  <Input
-                    className={classes.formControl}
-                    // defaultValue={jokerMatch.join(" ,")}
-                    value={jokerMatch?.join(" ,")}
-                    onChange={(e) => wordCount(e.target.value, "joker")}
-                    name="joker"
-                    inputRef={register}
-                  />
-                </FormControl> */}
                 <FormControl>
                   <InputLabel>What You Get 3 sec.7 words</InputLabel>
 
@@ -305,7 +259,6 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "get")}
                     name="get"
-                    // defaultValue={savedJokerData?.get}
                     inputRef={register}
                   />
                 </FormControl>
@@ -316,7 +269,6 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "why")}
                     name="why"
-                    // defaultValue={savedJokerData?.why}
                     inputRef={register}
                   />
                 </FormControl>
@@ -327,7 +279,6 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
                     name="conclusion"
-                    // defaultValue={savedJokerData?.conclusion}
                     multiline
                     rows={2}
                     rowsMax={4}
@@ -344,7 +295,6 @@ const Form = () => {
                     rowsMax={8}
                     onChange={(e) => wordCount(e.target.value, "explanation")}
                     name="explanation"
-                    // defaultValue={savedJokerData?.explanation}
                     inputRef={register}
                   />
                 </FormControl>
@@ -456,27 +406,6 @@ const Form = () => {
               </Button>
             </Grid>
           </Grid>
-          {/* <Grid container direction="row" justify="center"> */}
-
-          {/* <ButtonGroup>
-              <Button
-                className={classes.save}
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Save Content
-              </Button>
-              <Button
-                className={classes.delete}
-                variant="contained"
-                color="primary"
-                onClick={deleteContent}
-              >
-                Delete Content
-              </Button>
-            </ButtonGroup> */}
-          {/* </Grid> */}
         </form>
         <pre
           id="data"
