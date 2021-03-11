@@ -124,7 +124,10 @@ const Form = () => {
   };
 
   const deleteContent = () => {
-    localStorage.removeItem("myJokerWords");
+    if (window.confirm("Do you really delete the joker words?")) {
+      localStorage.removeItem("myJokerWords");
+      window.location.reload();
+    }
   };
 
   const wordCount = (text, name) => {
