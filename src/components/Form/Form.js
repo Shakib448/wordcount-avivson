@@ -162,8 +162,6 @@ const Form = () => {
     let unique = [...new Set(isIncluded)];
     setJokerMatch(unique);
 
-    console.log(unique);
-
     const isGet = get?.filter((value) => addJokerData.includes(value));
     setGetCount(isGet);
 
@@ -207,12 +205,8 @@ const Form = () => {
                   </InputLabel>
                   <Input
                     className={classes.formControl}
-                    // value={unique.join(" ,")}
-                    // defaultValue={
-                    //   unique?.length > 0
-                    //     ? unique.join(" ,")
-                    //     : savedJokerData.joker
-                    // }
+                    // defaultValue={jokerMatch.join(" ,")}
+                    value={jokerMatch.join(" ,")}
                     onChange={(e) => wordCount(e.target.value, "joker")}
                     name="joker"
                     inputRef={register}
