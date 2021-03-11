@@ -123,9 +123,11 @@ const Form = () => {
   };
 
   const deleteContent = () => {
-    if (window.confirm("Do you really delete the joker words?")) {
-      localStorage.removeItem("myJokerWords");
-      window.location.reload();
+    if (savedJokerData !== null) {
+      if (window.confirm("Do you really delete the joker words?")) {
+        localStorage.removeItem("myJokerWords");
+        window.location.reload();
+      }
     }
   };
 
@@ -400,25 +402,22 @@ const Form = () => {
           </Grid>
           <Grid container direction="row" justify="center">
             <ButtonGroup>
-              {savedJokerData === null ? (
-                <Button
-                  className={classes.save}
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                >
-                  Save Content
-                </Button>
-              ) : (
-                <Button
-                  className={classes.delete}
-                  variant="contained"
-                  color="primary"
-                  onClick={deleteContent}
-                >
-                  Delete Content
-                </Button>
-              )}
+              <Button
+                className={classes.save}
+                variant="contained"
+                color="primary"
+                type="submit"
+              >
+                Save Content
+              </Button>
+              <Button
+                className={classes.delete}
+                variant="contained"
+                color="primary"
+                onClick={deleteContent}
+              >
+                Delete Content
+              </Button>
             </ButtonGroup>
           </Grid>
         </form>
