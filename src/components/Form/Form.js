@@ -78,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
   according: {
     background: "transparent",
+    marginBottom: "5px",
   },
   accordingDetails: {
     display: "flex",
@@ -90,7 +91,6 @@ const Form = () => {
 
   const [joker, setJoker] = useState("");
   const [{ get }, setGet] = useState("");
-
   const [{ why }, setWhy] = useState("");
   const [{ conclusion }, setConclusion] = useState("");
   const [{ explanation }, setExplanation] = useState("");
@@ -101,7 +101,6 @@ const Form = () => {
   const [explanationCount, setExplanationCount] = useState([]);
   const [jokerMatch, setJokerMatch] = useState([]);
   const [jokerAdd, setJokerAdd] = useState([]);
-  console.log(jokerMatch);
 
   const totalJokerCount =
     lengthCount(getCount) +
