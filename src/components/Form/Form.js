@@ -74,12 +74,18 @@ const useStyles = makeStyles((theme) => ({
   },
   save: {
     margin: "20px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 40,
+    },
   },
   delete: {
     margin: "20px",
     backgroundColor: "red",
     "&:hover": {
       backgroundColor: "red",
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 40,
     },
   },
 }));
@@ -115,6 +121,10 @@ const Form = () => {
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
     localStorage.setItem("myJokerWords", JSON.stringify(data));
+  };
+
+  const deleteContent = () => {
+    localStorage.removeItem("myJokerWords");
   };
 
   const wordCount = (text, name) => {
@@ -401,6 +411,7 @@ const Form = () => {
                 variant="contained"
                 color="primary"
                 type="submit"
+                onClick={deleteContent}
               >
                 Delete Content
               </Button>
