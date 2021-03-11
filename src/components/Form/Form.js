@@ -248,7 +248,7 @@ const Form = () => {
                     id="panel1a-header"
                   >
                     <Typography variant="h5" className={classes.heading}>
-                      Accordion 1
+                      Add & Check your joker word
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails className={classes.accordingDetails}>
@@ -258,7 +258,6 @@ const Form = () => {
                       </InputLabel>
                       <Input
                         className={classes.formControl}
-                        // defaultValue={jokerMatch.join(" ,")}
                         value={jokerMatch?.join(" ,")}
                         onChange={(e) => wordCount(e.target.value, "joker")}
                         name="joker"
@@ -266,15 +265,11 @@ const Form = () => {
                       />
                     </FormControl>
                     <FormControl>
-                      <InputLabel>
-                        Count of joker words with first 70 words
-                      </InputLabel>
+                      <InputLabel>Add Your Joker Word</InputLabel>
                       <Input
                         className={classes.formControl}
-                        // defaultValue={jokerMatch.join(" ,")}
-                        value={jokerMatch?.join(" ,")}
                         onChange={(e) => wordCount(e.target.value, "joker")}
-                        name="joker"
+                        name="jokerAdd"
                         inputRef={register}
                       />
                     </FormControl>
