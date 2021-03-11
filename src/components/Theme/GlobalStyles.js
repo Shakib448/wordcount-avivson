@@ -119,6 +119,9 @@ const styles = (theme) => ({
       fontFamily: "Lato, sans-serif ",
       fontWeight: "bold",
     },
+    ".MuiFormControl-root": {
+      width: "100%",
+    },
   },
 });
 

@@ -9,9 +9,12 @@ import {
   FormControl,
   Input,
   InputLabel,
-  ButtonGroup,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
 import clsx from "clsx";
 import { useState } from "react";
 import { lengthCount, textData } from "../../Utils/Utils";
@@ -30,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     marginBottom: "15px",
+    width: "100%",
   },
   countArea: {
     position: "relative",
@@ -72,22 +76,30 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: 25,
     },
   },
-  save: {
-    margin: "20px",
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 40,
-    },
+  according: {
+    background: "transparent",
   },
-  delete: {
-    margin: "20px",
-    backgroundColor: "red",
-    "&:hover": {
-      backgroundColor: "red",
-    },
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 40,
-    },
+  accordingDetails: {
+    display: "flex",
+    flexDirection: "column",
   },
+
+  // save: {
+  //   margin: "20px",
+  //   [theme.breakpoints.down("sm")]: {
+  //     marginTop: 40,
+  //   },
+  // },
+  // delete: {
+  //   margin: "20px",
+  //   backgroundColor: "red",
+  //   "&:hover": {
+  //     backgroundColor: "red",
+  //   },
+  //   [theme.breakpoints.down("sm")]: {
+  //     marginTop: 40,
+  //   },
+  // },
 }));
 
 const Form = () => {
@@ -105,6 +117,8 @@ const Form = () => {
   const [conclusionCount, setConclusionCount] = useState([]);
   const [explanationCount, setExplanationCount] = useState([]);
   const [jokerMatch, setJokerMatch] = useState([]);
+  const [jokerAdd, setJokerAdd] = useState([]);
+  console.log(jokerMatch);
 
   const totalJokerCount =
     lengthCount(getCount) +
@@ -112,28 +126,34 @@ const Form = () => {
     lengthCount(conclusionCount) +
     lengthCount(explanationCount);
 
-  const myJokerData = localStorage.getItem("myJokerWords");
-  const savedJokerData = JSON.parse(myJokerData);
+  // const myJokerData = localStorage.getItem("myJokerWords");
+  // const savedJokerData = JSON.parse(myJokerData);
 
-  const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
+  const fullData = get
+    ?.concat(why)
+    ?.concat(conclusion)
+    ?.concat(explanation)
+    ?.concat(jokerAdd);
 
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
-    localStorage.setItem("myJokerWords", JSON.stringify(data));
+    // localStorage.setItem("myJokerWords", JSON.stringify(data));
   };
 
-  const deleteContent = () => {
-    if (savedJokerData !== null) {
-      if (window.confirm("Do you really delete the joker words?")) {
-        localStorage.removeItem("myJokerWords");
-        window.location.reload();
-      }
-    }
-  };
+  // const deleteContent = () => {
+  //   if (savedJokerData !== null) {
+  //     if (window.confirm("Do you really delete the joker words?")) {
+  //       localStorage.removeItem("myJokerWords");
+  //       window.location.reload();
+  //     }
+  //   }
+  // };
 
   const wordCount = (text, name) => {
     if (name === "joker") {
       setJoker(text);
+    } else if (name === "jokerAdd") {
+      setJokerAdd(text);
     } else if (name === "get") {
       setTimeout(() => {
         watchWords(text, name);
@@ -185,7 +205,9 @@ const Form = () => {
       "DERES",
     ];
 
-    const addJokerData = watch_words.concat(joker?.split(" "));
+    const addJokerData = watch_words
+      .concat(joker?.split(" "))
+      .concat(jokerAdd?.split(" "));
     const isIncluded = fullData?.filter((value) =>
       addJokerData.includes(value)
     );
@@ -229,7 +251,41 @@ const Form = () => {
           <Grid container direction="row" justify="center" spacing={8}>
             <Grid item md={6} sm={12} lg={6} xs={12}>
               <FormGroup>
-                <FormControl>
+                <Accordion className={classes.according}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography variant="h5" className={classes.heading}>
+                      Add & Check your joker word
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails className={classes.accordingDetails}>
+                    <FormControl>
+                      <InputLabel>
+                        Count of joker words with first 70 words
+                      </InputLabel>
+                      <Input
+                        className={classes.formControl}
+                        value={jokerMatch?.join(" ,")}
+                        onChange={(e) => wordCount(e.target.value, "joker")}
+                        name="joker"
+                        inputRef={register}
+                      />
+                    </FormControl>
+                    <FormControl>
+                      <InputLabel>Add Your Joker Word</InputLabel>
+                      <Input
+                        className={classes.formControl}
+                        onChange={(e) => wordCount(e.target.value, "jokerAdd")}
+                        name="jokerAdd"
+                        inputRef={register}
+                      />
+                    </FormControl>
+                  </AccordionDetails>
+                </Accordion>
+                {/* <FormControl>
                   <InputLabel>
                     Count of joker words with first 70 words
                   </InputLabel>
@@ -241,7 +297,7 @@ const Form = () => {
                     name="joker"
                     inputRef={register}
                   />
-                </FormControl>
+                </FormControl> */}
                 <FormControl>
                   <InputLabel>What You Get 3 sec.7 words</InputLabel>
 
@@ -249,7 +305,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "get")}
                     name="get"
-                    defaultValue={savedJokerData?.get}
+                    // defaultValue={savedJokerData?.get}
                     inputRef={register}
                   />
                 </FormControl>
@@ -260,7 +316,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "why")}
                     name="why"
-                    defaultValue={savedJokerData?.why}
+                    // defaultValue={savedJokerData?.why}
                     inputRef={register}
                   />
                 </FormControl>
@@ -271,7 +327,7 @@ const Form = () => {
                     className={classes.formControl}
                     onChange={(e) => wordCount(e.target.value, "conclusion")}
                     name="conclusion"
-                    defaultValue={savedJokerData?.conclusion}
+                    // defaultValue={savedJokerData?.conclusion}
                     multiline
                     rows={2}
                     rowsMax={4}
@@ -288,7 +344,7 @@ const Form = () => {
                     rowsMax={8}
                     onChange={(e) => wordCount(e.target.value, "explanation")}
                     name="explanation"
-                    defaultValue={savedJokerData?.explanation}
+                    // defaultValue={savedJokerData?.explanation}
                     inputRef={register}
                   />
                 </FormControl>
@@ -400,8 +456,9 @@ const Form = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid container direction="row" justify="center">
-            <ButtonGroup>
+          {/* <Grid container direction="row" justify="center"> */}
+
+          {/* <ButtonGroup>
               <Button
                 className={classes.save}
                 variant="contained"
@@ -410,18 +467,16 @@ const Form = () => {
               >
                 Save Content
               </Button>
-              {savedJokerData !== null && (
-                <Button
-                  className={classes.delete}
-                  variant="contained"
-                  color="primary"
-                  onClick={deleteContent}
-                >
-                  Delete Content
-                </Button>
-              )}
-            </ButtonGroup>
-          </Grid>
+              <Button
+                className={classes.delete}
+                variant="contained"
+                color="primary"
+                onClick={deleteContent}
+              >
+                Delete Content
+              </Button>
+            </ButtonGroup> */}
+          {/* </Grid> */}
         </form>
         <pre
           id="data"
