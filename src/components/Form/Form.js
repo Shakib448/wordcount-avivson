@@ -114,7 +114,6 @@ const Form = () => {
 
   const myJokerData = localStorage.getItem("myJokerWords");
   const savedJokerData = JSON.parse(myJokerData);
-  console.log(savedJokerData);
 
   const fullData = get?.concat(why)?.concat(conclusion)?.concat(explanation);
 
@@ -401,22 +400,25 @@ const Form = () => {
           </Grid>
           <Grid container direction="row" justify="center">
             <ButtonGroup>
-              <Button
-                className={classes.save}
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Save Content
-              </Button>
-              <Button
-                className={classes.delete}
-                variant="contained"
-                color="primary"
-                onClick={deleteContent}
-              >
-                Delete Content
-              </Button>
+              {savedJokerData === null ? (
+                <Button
+                  className={classes.save}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Save Content
+                </Button>
+              ) : (
+                <Button
+                  className={classes.delete}
+                  variant="contained"
+                  color="primary"
+                  onClick={deleteContent}
+                >
+                  Delete Content
+                </Button>
+              )}
             </ButtonGroup>
           </Grid>
         </form>
