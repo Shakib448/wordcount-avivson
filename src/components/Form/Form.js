@@ -102,11 +102,11 @@ const Form = () => {
   const [jokerMatch, setJokerMatch] = useState([]);
   const [jokerAdd, setJokerAdd] = useState([]);
 
-  const totalJokerCount =
-    lengthCount(getCount) +
-    lengthCount(whyCount) +
-    lengthCount(conclusionCount) +
-    lengthCount(explanationCount);
+  // const totalJokerCount =
+  //   lengthCount(getCount) +
+  //   lengthCount(whyCount) +
+  //   lengthCount(conclusionCount) +
+  //   lengthCount(explanationCount);
 
   const totalWordCounts =
     lengthCount(get) +
@@ -362,7 +362,7 @@ const Form = () => {
                   <List>
                     <ListItem
                       className={clsx(classes.countItems, {
-                        [classes.countItemsOk]: totalJokerCount >= 5,
+                        [classes.countItemsOk]: lengthCount(jokerMatch) >= 5,
                         // [classes.countItemsNotOk]: fullData?.length >= 71,
                       })}
                     >
