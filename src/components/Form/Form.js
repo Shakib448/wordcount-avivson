@@ -114,7 +114,7 @@ const Form = () => {
     lengthCount(conclusion) +
     lengthCount(explanation);
 
-  console.log(totalWordCounts >= 70 ? "yest" : " no");
+  console.log(totalWordCounts === 70 && "shakib");
 
   const fullData = get
     ?.concat(why)
@@ -183,7 +183,7 @@ const Form = () => {
     const addJokerData = watch_words
       .concat(joker?.split(" "))
       .concat(jokerAdd?.toString().split(" "));
-    if (totalWordCounts >= 70) {
+    if (totalWordCounts === 70) {
       const isIncluded = fullData?.filter((value) =>
         addJokerData.includes(value)
       );
@@ -366,7 +366,7 @@ const Form = () => {
                         // [classes.countItemsNotOk]: fullData?.length >= 71,
                       })}
                     >
-                      {totalJokerCount}
+                      {lengthCount(jokerMatch)}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
