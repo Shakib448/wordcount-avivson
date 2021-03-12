@@ -108,6 +108,14 @@ const Form = () => {
     lengthCount(conclusionCount) +
     lengthCount(explanationCount);
 
+  const totalWordCounts =
+    lengthCount(get) +
+    lengthCount(why) +
+    lengthCount(conclusion) +
+    lengthCount(explanation);
+
+  console.log(totalWordCounts >= 70 ? "yest" : " no");
+
   const fullData = get
     ?.concat(why)
     ?.concat(conclusion)
@@ -172,14 +180,15 @@ const Form = () => {
       "DIT",
       "DERES",
     ];
-
     const addJokerData = watch_words
       .concat(joker?.split(" "))
       .concat(jokerAdd?.toString().split(" "));
-    const isIncluded = fullData?.filter((value) =>
-      addJokerData.includes(value)
-    );
-    setJokerMatch(isIncluded);
+    if (totalWordCounts >= 70) {
+      const isIncluded = fullData?.filter((value) =>
+        addJokerData.includes(value)
+      );
+      setJokerMatch(isIncluded);
+    }
 
     const isGet = get?.filter((value) => addJokerData.includes(value));
     setGetCount(isGet);
@@ -314,10 +323,7 @@ const Form = () => {
                 <Grid container justify="center">
                   <List>
                     <ListItem className={clsx(classes.countItems)}>
-                      {lengthCount(get) +
-                        lengthCount(why) +
-                        lengthCount(conclusion) +
-                        lengthCount(explanation)}
+                      {totalWordCounts}
                     </ListItem>
                     <ListItem
                       className={clsx(classes.countItems, {
@@ -357,7 +363,7 @@ const Form = () => {
                     <ListItem
                       className={clsx(classes.countItems, {
                         [classes.countItemsOk]: totalJokerCount >= 5,
-                        [classes.countItemsNotOk]: fullData?.length >= 71,
+                        // [classes.countItemsNotOk]: fullData?.length >= 71,
                       })}
                     >
                       {totalJokerCount}
