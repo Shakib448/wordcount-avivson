@@ -102,19 +102,17 @@ const Form = () => {
   const [jokerMatch, setJokerMatch] = useState([]);
   const [jokerAdd, setJokerAdd] = useState([]);
 
-  // const totalJokerCount =
-  //   lengthCount(getCount) +
-  //   lengthCount(whyCount) +
-  //   lengthCount(conclusionCount) +
-  //   lengthCount(explanationCount);
+  const totalJokerCount =
+    lengthCount(getCount) +
+    lengthCount(whyCount) +
+    lengthCount(conclusionCount) +
+    lengthCount(explanationCount);
 
   const totalWordCounts =
     lengthCount(get) +
     lengthCount(why) +
     lengthCount(conclusion) +
     lengthCount(explanation);
-
-  console.log(totalWordCounts === 70 && "shakib");
 
   const fullData = get
     ?.concat(why)
@@ -420,6 +418,7 @@ const Form = () => {
             position: "absolute",
             top: "0",
             left: "0",
+            zIndex: "-9999",
           }}
         >
           {get?.join(" ")} <br /> <br />
