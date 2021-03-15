@@ -102,12 +102,6 @@ const Form = () => {
   const [jokerMatch, setJokerMatch] = useState([]);
   const [jokerAdd, setJokerAdd] = useState([]);
 
-  const totalJokerCount =
-    lengthCount(getCount) +
-    lengthCount(whyCount) +
-    lengthCount(conclusionCount) +
-    lengthCount(explanationCount);
-
   const totalWordCounts =
     lengthCount(get) +
     lengthCount(why) +
